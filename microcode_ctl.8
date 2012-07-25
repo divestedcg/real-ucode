@@ -10,7 +10,7 @@ microcode_ctl \- microcode utility for Intel IA32 processors
 ." Add any additional description here
 .PP
 The microcode_ctl utility is a companion to the IA32 microcode driver written
-by Tigran Aivazian <tigran@aivazian.fsnet.co.uk>. The uaility has two uses:
+by Tigran Aivazian <tigran@aivazian.fsnet.co.uk>. The utility has two uses:
 .br
 .PP
 \fBa)\fR it decodes and sends new microcode to the kernel driver to be
@@ -49,7 +49,7 @@ microcode_ctl -u
 Upload microcode using defaults
 .SH FILES
 .TP
-/etc/microcode.dat
+/usr/lib/firmware/amd-ucode and /usr/lib/firmware/intel-ucode
 The default microcode location
 .PD
 .SH AUTHOR
@@ -57,10 +57,10 @@ Microcode utility written by Simon Trimmer
 .br
 Linux Kernel driver written by Tigran Aivazian.
 .SH "REPORTING BUGS"
-Report bugs to either Simon Trimmer <simon@urbanmyth.org> or
-Tigran Aivazian <tigran@aivazian.fsnet.co.uk>
+Report bugs to Anton Arapov <anton@redhat.com>
 .SH COPYRIGHT
 Copyright \(co 2000 VERITAS Software
+Copyright \(co 2012 Red Hat, Inc
 .br
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -71,7 +71,8 @@ Linux.
 .br 
 .SH "SEE ALSO"
 The brave are recommended to view the driver source code located in the
-Linux Kernel source tree in arch/i386/kernel/microcode.c
+Linux Kernel source tree in /arch/x86/kernel/{microcode_core.c, 
+microcode_intel.c, microcode_amd.c}
 .PP
-Visit http://www.urbanmyth.org/microcode/ for more information
+Visit http://fedorahosted.org/microcode_ctl for more information
 and microcode updates.

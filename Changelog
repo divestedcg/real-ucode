@@ -56,3 +56,4 @@
 	updated the 1.16 tarball with newer microcode from Intel
 1.xx	25 July 2012, Anton Arapov <anton@redhat.com>
 	remove the microcode tarball from the tree
+	update microcode_ctl.8 manpage
