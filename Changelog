@@ -36,3 +36,6 @@
 	updated the 1.07 tarball with newer microcode from Intel
 1.09	02 Sept 2004, Simon Trimmer <simon@urbanmyth.org>
 	updated the 1.08 tarball with newer microcode from Intel
+1.10	25 October 2004, Simon Trimmer <simon@urbanmyth.org>
+	updated with new microcode from Intel
+	applied patch from Tigran for x86_64 support and some cleanups

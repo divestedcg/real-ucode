@@ -7,7 +7,7 @@ written by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 
 a) it decodes and sends new microcode to the kernel driver to be uploaded
    to Intel IA32 family processors. (Pentium Pro, PII, Celeron, PIII, 
-   Xeon, Pentium 4 etc)
+   Xeon, Pentium 4 etc, x86_64)
 b) it signals the kernel driver to release any buffers it may hold
 
 The microcode update is volatile and needs to be uploaded on each system
@@ -47,6 +47,8 @@ this is equivalent to
 If you are using devfs, then you can either access the driver via regular
 file cpu/microcode or via misc character device misc/microcode, both
 of which are created automatically under the devfs mountpoint.
+
+You may also find your microcode device node under /dev/cpu/0/microcode
 
 ***************************************************************************
 >>> how to compile it
