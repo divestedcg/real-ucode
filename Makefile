@@ -11,17 +11,17 @@
 PROGRAM		= microcode_ctl
 MANPAGE		= microcode_ctl.8
 
-INS		= install
-CC		= gcc
-KERNELHEADER    = /usr/src/linux/include
+INS			= install
+CC			= gcc
+KERNELHEADER = /usr/src/linux/include
 CFLAGS		= -g -Wall -O2 -I $(KERNELHEADER)
 
 DESTDIR		=
 PREFIX		= /usr/local
 
 INSDIR		= $(PREFIX)/sbin
-MANDIR		= $(PREFIX)/man/man8
-MICDIR		= /etc
+MANDIR		= $(PREFIX)/share/man/man8
+MICDIR		= /lib/firmware
 
 RCFILE		= microcode_ctl.start
 RCFILEFINAL	= microcode_ctl
@@ -44,7 +44,7 @@ install:
 			$(DESTDIR)$(MANDIR) $(DESTDIR)$(RCFILETO) \
 			$(DESTDIR)$(RCLINKTO)
 
-	$(INS) -s -m 755 $(PROGRAM) $(DESTDIR)$(INSDIR)
+	$(INS) -m 755 $(PROGRAM) $(DESTDIR)$(INSDIR)
 
 	$(INS) -m 644 $(MANPAGE) $(DESTDIR)$(MANDIR)
 	gzip -9f $(DESTDIR)$(MANDIR)/$(MANPAGE)
