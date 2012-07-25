@@ -43,3 +43,5 @@
 	remove some old references to the old -i free buffer option
 1.12	13 September 2005, Simon Trimmer <simon@urbanmyth.org>
 	updated the 1.11 tarball with newer microcode from Intel
+1.13	19 January 2006, Simon Trimmer <simon@urbanmyth.org>
+	updated the 1.12 tarball with newer microcode from Intel
