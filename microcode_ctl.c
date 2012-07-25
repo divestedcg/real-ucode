@@ -26,6 +26,7 @@
 struct task_struct { int a ; };
 #endif
 
+#include <asm/cache.h>
 #include <asm/processor.h>
 
 static char *progname;

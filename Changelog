@@ -22,3 +22,7 @@
 	readme tidyup
 	replace P6 with IA32 - the Pentium 4 is of family 15
 	new microcode release from intel
+1.05	31 May 2001, Simon Trimmer <simon@veritas.com>
+	new microcode release from intel
+	Debian startup script fixes from Peter Kovacs <pkovacs@webmachines.com>
+	added asm/cache.h to make compatible with Andrea Arcangeli's patches.
