@@ -26,7 +26,7 @@ int print_error_messages=1;
 #define MAX_MICROCODE	2000000
 
 #define MICROCODE_DEVICE_DEFAULT	"/dev/cpu/microcode"
-#define MICROCODE_FILE_DEFAULT		"/etc/microcode.dat"
+#define MICROCODE_FILE_DEFAULT		"/lib/firmware/microcode.dat"
 
 static void usage(void)
 {
@@ -53,17 +53,19 @@ static int do_update(char *device, char *filename)
 {
 	FILE *fp;
 	char line_buffer[BUFFER_SIZE];
-	int microcode[MAX_MICROCODE];
+	int *microcode;
 	int *pos;
 	int outfd;
 	int wrote, length;
 
+	microcode=malloc(sizeof(int)* MAX_MICROCODE);
+	if (!microcode) return ENOMEM;
 
 	if( (fp=fopen(filename, "r")) == NULL){
 		if(print_error_messages)
 			fprintf(stderr, "%s: cannot open source file '%s' errno=%d (%s)\n",
 				progname, filename, errno, strerror(errno));
-		return errno;
+		goto end;
 	}
 
 	pos = microcode;
@@ -73,7 +75,7 @@ static int do_update(char *device, char *filename)
 		  * Data lines will are of the form "%x, %x, %x, %x", therefore
 		  * lines start with a 0
 		  */
-                if(*line_buffer == '0'){
+		if(*line_buffer == '0'){
 			sscanf(line_buffer, "%x, %x, %x, %x", pos,
 					(pos + 1), (pos + 2), (pos + 3));
 			pos += 4;
@@ -85,7 +87,7 @@ static int do_update(char *device, char *filename)
 				fprintf(stderr, "%s: file too large for utility microcode buffer\n"
 						"%s: change MAX_MICROCODE yourself :)\n", progname, progname);
 			fclose(fp);	
-			return errno;
+			goto end;
 		}
 		
 	}
@@ -99,16 +101,16 @@ static int do_update(char *device, char *filename)
 		if(print_error_messages)
 			fprintf(stderr, "%s: cannot open %s for writing errno=%d (%s)\n",
 				progname, device, errno, strerror(errno));
-		return errno;
+		goto end;
 	}
 
-	if( (wrote = write(outfd, &microcode, length)) < 0){
+	if( (wrote = write(outfd, microcode, length)) < 0){
 		if(print_error_messages)
 			fprintf(stderr, "%s: error writing to '%s' errno=%d (%s)\n"
 					"%s: there may be messages from the driver in your system log.\n",
 				progname, device, errno, strerror(errno), progname);
 		close(outfd);
-		return errno;
+		goto end;
 	}
 
 	if((wrote == length) && print_normal_messages)
@@ -117,6 +119,8 @@ static int do_update(char *device, char *filename)
 
 	close(outfd);
 
+ end:
+	free(microcode);
 	return errno;
 }
 
