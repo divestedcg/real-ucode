@@ -1,5 +1,5 @@
 %define name    microcode_ctl
-%define version 1.15
+%define version 1.16
 %define release 1
 %define serial  1
 %define prefix  /usr
@@ -18,7 +18,7 @@ Buildroot:      /var/tmp/%{name}-%{version}-root
 
 %description
 The microcode_ctl utility is a companion to the IA32 microcode driver written
-by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
+by Tigran Aivazian <tigran@aivazian.fsnet.co.uk>. The utility has two uses:
 
 a) it decodes and sends new microcode to the kernel driver to be uploaded
    to Intel IA32 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon
