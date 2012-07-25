@@ -54,7 +54,7 @@
 	Tigran's email address to tigran@aivazian.fsnet.co.uk
 1.17	36 April 2007,  Simon Trimmer <simon@urbanmyth.org>
 	updated the 1.16 tarball with newer microcode from Intel
-1.xx	25 July 2012, Anton Arapov <anton@redhat.com>
+1.18	25 July 2012, Anton Arapov <anton@redhat.com>
 	remove the microcode tarball from the tree
 	update microcode_ctl.8 manpage
 	fix a segfault that may be triggered by very long parameter
