@@ -1,0 +1,28 @@
+#!/bin/bash
+# description: basic script to apply the microcode
+# (written for redhat 6.2, portability changes welcome)
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+
+case "$1" in
+  start)
+	echo "Applying Intel P6 Microcode update... "
+        daemon /usr/sbin/microcode_ctl -Qui
+	RETVAL=$?
+	echo
+	;;
+  stop)
+	;;
+  restart)
+        ;;
+  status)
+        ;;
+  *)
+	echo "Usage: microcode start}"
+	exit 1
+esac
+
+exit $RETVAL

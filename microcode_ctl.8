@@ -1,5 +1,5 @@
 .\" this is a comment`
-.TH MICROCODE_CTL "8" "21 June 2000" "microcode_ctl" Veritas
+.TH MICROCODE_CTL "8" "21 June 2000" "microcode_ctl"
 .SH NAME
 microcode_ctl \- microcode utility for Intel P6 processors
 .SH SYNOPSIS
@@ -13,9 +13,12 @@ The microcode_ctl utility is a companion to the P6 microcode driver written
 by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 .br
 .PP
-\fBa)\fR it decodes and sends new microcode to the kernel driver to be uploaded to Intel P6 family processors. (Pentium Pro, PII, PIII, Xeon etc)
+\fBa)\fR it decodes and sends new microcode to the kernel driver to be uploaded to Intel P6 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon etc)
 .PP
-\fBb)\fR it signals the kernel driver to release any buffers it may hold
+\fBb)\fR it signals the kernel driver to release the buffers containing the
+copy of microcode data actually applied to given CPU, linear array of 2048
+bytes per CPU, see struct microcode in include/asm/processor.h for
+information on the layout of chunks buffers it may hold
 .br
 .PP
 The microcode update is volatile and needs to be uploaded on each system
@@ -38,7 +41,7 @@ upload microcode from named Intel formatted file
 .SH EXAMPLE
 .TP
 microcode_ctl -iu
-Upload
+Upload and free kernel buffers
 .SH FILES
 .TP
 /etc/microcode.dat
@@ -52,7 +55,7 @@ Linux Kernel driver written by Tigran Aivazian.
 Report bugs to either Simon Trimmer <simon@veritas.com> or
 Tigran Aivazian <tigran@veritas.com>
 .SH COPYRIGHT
-Copyright \(co 2000 Veritas Software
+Copyright \(co 2000 VERITAS Software
 .br
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

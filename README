@@ -1,14 +1,3 @@
-1.0 	09 June 2000, Simon Trimmer <simon@veritas.com>
-	Initial release.
-1.01	19 June 2000, Simon Trimmer <simon@veritas.com>
-	general tidy up and argument sequencing fix
-	added default microcode filename and -u switch
-1.02    29 June 2000,   Simon Trimmer <simon@veritas.com>
-	fix from Intel to be more flexible with the file
-	formats.
-	added a man page into section 8
-
-
 ***************************************************************************
 >>> What it does
 ***************************************************************************
@@ -17,7 +6,7 @@ The microcode_ctl utility is a companion to the P6 microcode driver written
 by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 
 a) it decodes and sends new microcode to the kernel driver to be uploaded
-   to Intel P6 family processors. (Pentium Pro, PII, PIII, Xeon etc)
+   to Intel P6 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon etc)
 b) it signals the kernel driver to release any buffers it may hold
 
 The microcode update is volatile and needs to be uploaded on each system
@@ -49,6 +38,10 @@ section.
 Since 2.4.0-test1-ac10 the kernel driver supports regular misc device and
 devfs. To create the device node on a non-devfs system as root type:
 
+# make device
+
+this is equivalent to
+
 # mkdir -p /dev/cpu/
 # mknod /dev/cpu/microcode c 10 184
 
@@ -60,16 +53,15 @@ of which are created automatically by devfs.
 >>> how to compile it
 ***************************************************************************
 
-The utility has a simple Makefile to compile and install the software;
+The utility has a simple Makefile to compile and install the software,
+there are three targetsof interest;
 
-# make
-gcc -g -Wall -o microcode_ctl microcode_ctl.c
+- "make all" will build the program executable
+- "make install" will copy the files into standard locations
+- "make device" will create a microcode device node
 
-# make install
-mkdir -p /usr/local/bin
-install -m 755 microcode_ctl /usr/local/bin
-install -m 644 microcode.dat /etc
-
+when building from the source it is recommended to execute "make install
+device"
 
 ***************************************************************************
 >>> getting Intel microcode
@@ -115,7 +107,6 @@ microcode_ctl: writing microcode (length: 98304)
 microcode_ctl: error writing to '/dev/cpu/microcode' errno=5 (Input/output error)
 microcode_ctl: there may be messages from the driver in your system log.
 
-
 ***************************************************************************
 >>> freeing off the internal buffer
 ***************************************************************************
@@ -129,6 +120,11 @@ precedes it.
 >>> updating every system boot
 ***************************************************************************
 
+A simple script "microcode_ctl.start" has been included for RedHat 6.2
+systems to apply the microcode update on system startup. The script is a
+good illustration on how to use the utility but it may be useful to run
+through some basic usage. 
+
 To update your microcode and free the internal buffer on every system boot
 you'll need to add a line like the following to /etc/rc.d/rc.local
 
@@ -138,10 +134,20 @@ or to specify another microcode file
 
 /usr/local/bin/microcode_ctl -if /etc/microcode.dat
 
-
 Simple as that. Problems? Contact either myself at simon@veritas.com or
 Tigran at tigran@veritas.com
 
+
+***************************************************************************
+>>> Contributors
+***************************************************************************
+Credit where credit is due; the following people contributed ideas or
+patches. Thanks :)
+
+Richard Schaal <richard.schaal@intel.com>
+Andreas Steinmetz <ast@domdv.de>
+Giacomo Catenazzi <cate@neper.ethz.ch>
+John Moore <johnmoore@iee.org>
 
 ***************************************************************************
 >>> Special thanks

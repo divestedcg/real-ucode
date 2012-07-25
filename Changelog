@@ -7,3 +7,12 @@
 	fix from Richard Schaal <richard.schaal@intel.com>
 	to be more flexible with the file formats.
 	added a man page into section 8
+1.03	07 Sept 2000,   Simon Trimmer <simon@veritas.com>
+	a few small fixes from Tigran Aivazian <tigran@veritas.com>
+	Makefile changes (abstraction for packaging and portability)
+	more Makefile changes from Giacomo Catenazzi <cate@neper.ethz.ch>
+	RPM .spec file
+	integrate 2.2.16 backport from Andreas Steinmetz <ast@domdv.de>
+	added Makefile device node creation (to be tested with devfs)
+	added the quiet and very quiet options (-q and -Q)
+	added a redhat style rc startup script
