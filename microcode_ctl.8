@@ -1,24 +1,26 @@
 .\" this is a comment`
-.TH MICROCODE_CTL "8" "21 June 2000" "microcode_ctl"
+.TH MICROCODE_CTL "8" "17 January 2001" "microcode_ctl"
 .SH NAME
-microcode_ctl \- microcode utility for Intel P6 processors
+microcode_ctl \- microcode utility for Intel IA32 processors
 .SH SYNOPSIS
 .B microcode_ctl
-[\fI\-h\fR] [\fI\-i\fR] [\fI\-u\fR] [\fI\-f microcode\fR]
+[\fI\-h\fR] [\fI\-i\fR] [\fI\-u\fR [\fI\-q\fR]] [\fI\-Q\fR] [\fI\-f microcode\fR]
 .br
 .SH DESCRIPTION
 ." Add any additional description here
 .PP
-The microcode_ctl utility is a companion to the P6 microcode driver written
+The microcode_ctl utility is a companion to the IA32 microcode driver written
 by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 .br
 .PP
-\fBa)\fR it decodes and sends new microcode to the kernel driver to be uploaded to Intel P6 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon etc)
+\fBa)\fR it decodes and sends new microcode to the kernel driver to be
+uploaded to Intel IA32 processors. (Pentium Pro, PII, Celeron, PIII,
+Xeon, Pentium 4 etc)
 .PP
 \fBb)\fR it signals the kernel driver to release the buffers containing the
 copy of microcode data actually applied to given CPU, linear array of 2048
 bytes per CPU, see struct microcode in include/asm/processor.h for
-information on the layout of chunks buffers it may hold
+information on the layout of chunks buffers may hold
 .br
 .PP
 The microcode update is volatile and needs to be uploaded on each system
@@ -37,6 +39,12 @@ upload microcode (from default filename)
 .TP
 \fB\-f\fR
 upload microcode from named Intel formatted file
+.TP
+\fB\-q\fR
+run silently when successful
+.TP
+\fB\-Q\fR
+run silently even on failure
 .PD
 .SH EXAMPLE
 .TP

@@ -16,3 +16,9 @@
 	added Makefile device node creation (to be tested with devfs)
 	added the quiet and very quiet options (-q and -Q)
 	added a redhat style rc startup script
+1.04	17 January 2001, Simon Trimmer <simon@veritas.com>
+	startup script portability changes (tar, rpm and SuSE)
+	build RPM direct from tar file (rpm -ta microcode_ctl-x.xx.tar.gz)
+	readme tidyup
+	replace P6 with IA32 - the Pentium 4 is of family 15
+	new microcode release from intel

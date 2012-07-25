@@ -1,4 +1,4 @@
-# Makefile part of microcode_ctl
+# Makefile part of microcode_ctl package
 #
 # Copyright 2000 (c) Simon Trimmer, Tigran Aivazian.
 #
@@ -8,9 +8,8 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM		= microcode_ctl
-MICROCODE	= intel-p6microcode-22June2000.txt
+MICROCODE	= intel-ia32microcode-17Jan2001.txt
 MANPAGE		= microcode_ctl.8
-RCFILE		= microcode_ctl.start
 
 INS		= install
 CC		= gcc
@@ -22,16 +21,13 @@ PREFIX		= /usr/local
 
 INSDIR		= $(PREFIX)/sbin
 MANDIR		= $(PREFIX)/man/man8
-DOCDIR		= $(PREFIX)/doc
 MICDIR		= /etc
 
+RCFILE		= microcode_ctl.start
+RCFILEFINAL	= microcode_ctl
 RCDIR		= /etc/rc.d
 RCHOMEDIR	= init.d
-RCLINKDIR	= rc3.d
-RCLINKNAME	= S95microcode_ctl
-
 RCFILETO	= $(RCDIR)/$(RCHOMEDIR)
-RCLINKTO	= $(RCDIR)/$(RCLINKDIR)
 
 all: microcode_ctl
 
@@ -45,7 +41,6 @@ install:
 	$(INS) -d	$(DESTDIR)$(INSDIR) $(DESTDIR)$(MICDIR) \
 			$(DESTDIR)$(MANDIR) $(DESTDIR)$(RCFILETO) \
 			$(DESTDIR)$(RCLINKTO)
-			
 
 	$(INS) -s -m 755 $(PROGRAM) $(DESTDIR)$(INSDIR)
 	$(INS) -m 644 $(MICROCODE) $(DESTDIR)$(MICDIR)/microcode.dat
@@ -53,11 +48,24 @@ install:
 	$(INS) -m 644 $(MANPAGE) $(DESTDIR)$(MANDIR)
 	gzip -9f $(DESTDIR)$(MANDIR)/$(MANPAGE)
 
-	$(INS) -m 755 $(RCFILE) $(DESTDIR)$(RCFILETO)/$(RCFILE)
+	$(INS) -m 755 $(RCFILE) $(DESTDIR)$(RCFILETO)/$(RCFILEFINAL)
 
-	ln -fs ../$(RCHOMEDIR)/$(RCFILE) $(DESTDIR)/$(RCLINKTO)/$(RCLINKNAME)
+ifndef DESTDIR
+		chkconfig --add $(RCFILEFINAL)
+else
+		echo "MAKE: Skipping chkconfig operation (rpm build?)"
+endif
 
 device:
 	mkdir -p $(DESTDIR)/dev/cpu
 	mknod $(DESTDIR)/dev/cpu/microcode c 10 184
 
+uninstall:
+ifndef DESTDIR
+	chkconfig --del $(RCFILEFINAL)
+endif
+# shame there isn't reverse of install...
+	rm $(DESTDIR)$(INSDIR)/$(PROGRAM) \
+		$(DESTDIR)$(MICDIR)/microcode.dat \
+		$(DESTDIR)$(MANDIR)/$(MANPAGE).gz \
+		$(DESTDIR)$(RCFILETO)/$(RCFILEFINAL)

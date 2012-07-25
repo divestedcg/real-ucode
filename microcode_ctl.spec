@@ -1,10 +1,10 @@
 %define name    microcode_ctl
-%define version 1.03
+%define version 1.04
 %define release 1
 %define serial  1
 %define prefix  /usr
 
-Summary:        Intel P6 CPU Microcode Utility
+Summary:        Intel IA32 CPU Microcode Utility
 Name:           %{name}
 Version:        %{version}
 Release:        %{release}
@@ -17,11 +17,12 @@ Source:         %{name}-%{version}.tar.gz
 Buildroot:      /var/tmp/%{name}-%{version}-root
 
 %description
-The microcode_ctl utility is a companion to the P6 microcode driver written
+The microcode_ctl utility is a companion to the IA32 microcode driver written
 by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 
 a) it decodes and sends new microcode to the kernel driver to be uploaded
-   to Intel P6 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon etc)
+   to Intel IA32 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon
+   Pentium 4 etc.)
 b) it signals the kernel driver to release any buffers it may hold
 
 The microcode update is volatile and needs to be uploaded on each system
@@ -48,9 +49,27 @@ make DESTDIR=$RPM_BUILD_ROOT PREFIX=%{prefix} install device clean
 %{prefix}/man/*/*
 /etc/microcode.dat
 /etc/rc.d/init.d/*
-/etc/rc.d/rc3.d/*
 /dev/cpu/microcode
 
-%changelog
-* Wed Sep  6 2000 Simon Trimmer <simon@veritas.com>
-- Initial RPM
+%post
+if [ -x /sbin/chkconfig ];
+then
+	chkconfig --add microcode_ctl
+elif [ -f /etc/SuSE-release ];
+then
+	# XXX is there a better way to do this under SuSE?
+	ln -s ../microcode_ctl /sbin/init.d/rc2.d/S80microcode_ctl
+	ln -s ../microcode_ctl /sbin/init.d/rc2.d/K20microcode_ctl
+else
+	echo "RPM: Unknown system, leaving system startup alone"
+fi
+
+%preun
+if [ -x /sbin/chkconfig ];
+then
+	chkconfig --del microcode_ctl
+elif [ -f /etc/SuSE-release ];
+then
+	rm -f /sbin/init.d/rc2.d/S80microcode_ctl
+	rm -f /sbin/init.d/rc2.d/K20microcode_ctl
+fi

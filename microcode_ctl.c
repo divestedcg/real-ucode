@@ -47,9 +47,9 @@ int print_error_messages=1;
 static void usage(void)
 {
 	fprintf(stderr, "\nThis program is for updating the microcode on Intel processors\n"
-			"belonging to the P6 family - PentiumPro, Pentium II, Pentium III etc.\n"
+			"belonging to the IA32 family - PentiumPro upwards.\n"
 			"It depends on the Linux kernel microcode driver.\n\n"
-			"Usage: %s [-h] [-i] [-u] [-f microcode]\n\n"
+			"Usage: %s [-h] [-i] [-u] [-q] [-Q] [-f microcode]\n\n"
 			"  -h 		this usage message\n"
 			"  -q 		run silently when successful\n"
 			"  -Q 		run silently even on failure\n"
@@ -69,7 +69,7 @@ static int do_ioctl(char *device, int cmd)
 			fprintf(stderr, "%s: open(%s), errno=%d (%s)\n",
 				progname, device, errno, strerror(errno));
 		
-		return 1;
+		return errno;
 	}
 	if (ioctl(fd, cmd, 0) == -1) {
 		if(print_error_messages)
@@ -104,7 +104,7 @@ static int do_update(char *device, char *filename)
 		if(print_error_messages)
 			fprintf(stderr, "%s: cannot open source file '%s' errno=%d (%s)\n",
 				progname, filename, errno, strerror(errno));
-		return 1;
+		return errno;
 	}
 
 	pos = microcode;
@@ -126,7 +126,7 @@ static int do_update(char *device, char *filename)
 				fprintf(stderr, "%s: file too large for utility microcode buffer\n"
 						"%s: change MAX_MICROCODE yourself :)\n", progname, progname);
 			fclose(fd);	
-			return 1;
+			return errno;
 		}
 		
 	}
@@ -140,7 +140,7 @@ static int do_update(char *device, char *filename)
 		if(print_error_messages)
 			fprintf(stderr, "%s: cannot open %s for writing errno=%d (%s)\n",
 				progname, device, errno, strerror(errno));
-		return 1;
+		return errno;
 	}
 
 	if( (wrote = write(outfd, &microcode, length)) < 0){
@@ -149,7 +149,7 @@ static int do_update(char *device, char *filename)
 					"%s: there may be messages from the driver in your system log.\n",
 				progname, device, errno, strerror(errno), progname);
 		close(outfd);
-		return 1;
+		return errno;
 	}
 
 	if((wrote == length) && print_normal_messages)
@@ -158,7 +158,7 @@ static int do_update(char *device, char *filename)
 
 	close(outfd);
 
-	return 0;
+	return errno;
 }
 
 int main(int argc, char *argv[])

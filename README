@@ -2,11 +2,12 @@
 >>> What it does
 ***************************************************************************
 
-The microcode_ctl utility is a companion to the P6 microcode driver written
-by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
+The microcode_ctl utility is a companion to the IA32 microcode driver
+written by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
 
 a) it decodes and sends new microcode to the kernel driver to be uploaded
-   to Intel P6 family processors. (Pentium Pro, PII, Celeron, PIII, Xeon etc)
+   to Intel IA32 family processors. (Pentium Pro, PII, Celeron, PIII, 
+   Xeon, Pentium 4 etc)
 b) it signals the kernel driver to release any buffers it may hold
 
 The microcode update is volatile and needs to be uploaded on each system
@@ -18,7 +19,7 @@ back to the old microcode.
 >>> got an AMD or any non-Intel processor?
 ***************************************************************************
 
-This driver is designed for Intel P6 microprocessors only, it will not work
+This driver is designed for Intel microprocessors only, it will not work
 with AMD or any other non-Intel processors as they don't support microcode
 updates or they support it in a manner different from Intel's specs.
 
@@ -27,16 +28,14 @@ updates or they support it in a manner different from Intel's specs.
 >>> how to compile the kernel to include support for microcode update
 ***************************************************************************
 
-The microcode driver is a feature of the Linux kernel added to the v2.3
-stream in February 2000, it needs to be enabled at compile time and it may
-be compiled as a module. This utility relates to kernel 2.4.0-test1-ac10
-or newer. (microcode driver v1.04+)
+The microcode driver is a feature of the Linux kernel added to 2.4.0-test1 and
+2.2.18, it needs to be enabled at compile time and it may be compiled as a
+module.  CONFIG_MICROCODE is in the "Processor type and features" kernel
+configuration section.  This utility relates to kernel microcode driver v1.04
+or newer.
 
-CONFIG_MICROCODE is in the "Processor type and features" configuration
-section.
-
-Since 2.4.0-test1-ac10 the kernel driver supports regular misc device and
-devfs. To create the device node on a non-devfs system as root type:
+The kernel driver supports regular misc device and devfs, to create the device
+node on a non-devfs system as root type:
 
 # make device
 
@@ -46,22 +45,22 @@ this is equivalent to
 # mknod /dev/cpu/microcode c 10 184
 
 If you are using devfs, then you can either access the driver via regular
-file /dev/cpu/microcode or via misc characte device /dev/misc/microcode, both
-of which are created automatically by devfs.
+file cpu/microcode or via misc character device misc/microcode, both
+of which are created automatically under the devfs mountpoint.
 
 ***************************************************************************
 >>> how to compile it
 ***************************************************************************
 
 The utility has a simple Makefile to compile and install the software,
-there are three targetsof interest;
+there are three targets of interest;
 
 - "make all" will build the program executable
 - "make install" will copy the files into standard locations
 - "make device" will create a microcode device node
 
 when building from the source it is recommended to execute "make install
-device"
+device" or use the rpm packaging feature "rpm -ta microcode_ctl-n.tar.gz"
 
 ***************************************************************************
 >>> getting Intel microcode
@@ -70,15 +69,16 @@ device"
 This package has a file called microcode.dat containing Intel microcode,
 normally this file will be installed as /etc/microcode.dat
 
-Intel P6 microcode updates will be hosted on this utility's web page:
+Intel IA32 microcode updates will be hosted on this utility's web page:
 http://www.urbanmyth.org/microcode/
 
 ***************************************************************************
 >>> how to invoke it
 ***************************************************************************
 
-The utility installs by default into /usr/local/bin as microcode_ctl
-it can be invoked simply as /usr/local/bin/microcode_ctl -f /etc/microcode
+The utility installs by default into /usr/local whilst the RPM package
+installs files into /usr - the supplied system startup script is aware of
+both locations. The utility can be invoked simply as "microcode_ctl -u"
 
 The utility will print something like:
 
@@ -120,19 +120,20 @@ precedes it.
 >>> updating every system boot
 ***************************************************************************
 
-A simple script "microcode_ctl.start" has been included for RedHat 6.2
-systems to apply the microcode update on system startup. The script is a
-good illustration on how to use the utility but it may be useful to run
-through some basic usage. 
+A simple script has been included for systems to apply the microcode
+update on boot. The script is a good illustration on how to use the
+utility but it may be useful to run through some basic usage.
 
-To update your microcode and free the internal buffer on every system boot
-you'll need to add a line like the following to /etc/rc.d/rc.local
+Without using the provided startup script, to update your microcode and
+free the internal buffer on every system boot you'll need to add a line
+like the following to /etc/rc.d/rc.local (where prefix indicates the 
+location of the binary)
 
-/usr/local/bin/microcode_ctl -iu
+prefix/microcode_ctl -iu
 
 or to specify another microcode file 
 
-/usr/local/bin/microcode_ctl -if /etc/microcode.dat
+prefix/microcode_ctl -if /etc/microcode.dat
 
 Simple as that. Problems? Contact either myself at simon@veritas.com or
 Tigran at tigran@veritas.com
@@ -148,6 +149,7 @@ Richard Schaal <richard.schaal@intel.com>
 Andreas Steinmetz <ast@domdv.de>
 Giacomo Catenazzi <cate@neper.ethz.ch>
 John Moore <johnmoore@iee.org>
+Oliver Fassbender <olli@intrepid.de>
 
 ***************************************************************************
 >>> Special thanks
