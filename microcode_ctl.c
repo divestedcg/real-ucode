@@ -2,6 +2,7 @@
  * microcode_ctl - Manipulate /dev/cpu/microcode under Linux
  *
  * Copyright 2000 (c) Simon Trimmer, Tigran Aivazian.
+ * Copyright 2012 (c) Anton Arapov.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,7 +148,8 @@ int main(int argc, char *argv[])
 				break;
 
 			case 'd':
-				strcpy(device, optarg);
+				strncpy(device, optarg, sizeof(device));
+				device[sizeof(device)-1] = '\0'; /* ensure null terminated */
 				break;
 
 			case 'u': /* do a microcode upload */
@@ -156,7 +158,8 @@ int main(int argc, char *argv[])
 
 			case 'f': /* set microcode file to optarg and upload */
 				upload++;
-				strcpy(filename, optarg);
+				strncpy(filename, optarg, sizeof(filename));
+				filename[sizeof(filename)-1] = '\0'; /* ensure null terminated */
 				break;
 
 			case '?':
