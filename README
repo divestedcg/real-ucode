@@ -135,7 +135,7 @@ or to specify another microcode file
 
 prefix/microcode_ctl -if /etc/microcode.dat
 
-Simple as that. Problems? Contact either myself at simon@veritas.com or
+Simple as that. Problems? Contact either myself at simon@urbanmyth.org or
 Tigran at tigran@veritas.com
 
 
@@ -163,4 +163,4 @@ o Intel Corporation, for supplying microcode update data and publishing
   the specifications that enabled us to write microcode driver for Linux.
 
   
-- Simon Trimmer <simon@veritas.com> http://www.urbanmyth.org
+- Simon Trimmer <simon@urbanmyth.org> http://www.urbanmyth.org
