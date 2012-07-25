@@ -8,6 +8,13 @@
  * as published by the Free Software Foundation; either version
  * 2 of the License, or (at your option) any later version.
  *
+ *	1.0	09 June 2000,	Simon Trimmer <simon@veritas.com>
+ *				Tigran Aivazian <tigran@sco.com>
+ * 		Initial release
+ *	1.01	19 June 2000,	Simon Trimmer <simon@veritas.com>
+ * 		general tidy up and argument sequencing fix
+ * 		added default microcode filename and -u switch
+ * 				
  */
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -22,16 +29,23 @@
 #include <asm/processor.h>
 
 static char *progname;
-static int  freeflag=0;
+
+#define BUFFER_SIZE	4096
+#define MAX_MICROCODE	2000000
+
+#define MICROCODE_DEVICE_DEFAULT	"/dev/cpu/microcode"
+#define MICROCODE_FILE_DEFAULT		"/etc/microcode.dat"
+
 static void usage(void)
 {
 	fprintf(stderr, "\nThis program is for updating the microcode on Intel processors\n"
 			"belonging to the P6 family - PentiumPro, Pentium II, Pentium III etc.\n"
-			"It depends on the linux kernel microcode driver.\n\n"
-			"Usage: %s [-h] [-i] [-f microcode]\n\n"
+			"It depends on the Linux kernel microcode driver.\n\n"
+			"Usage: %s [-h] [-i] [-u] [-f microcode]\n\n"
 			"  -h 		this usage message\n"
 			"  -i 		release any buffers held in microcode driver\n"
-			"  -f microcode	load microcode from the named Intel formatted file\n\n", progname);
+			"  -u		upload microcode (default filename:\"%s\"\n"
+			"  -f		upload microcode from named Intel formatted file\n\n", progname, MICROCODE_FILE_DEFAULT);
 }
 
 static int do_ioctl(char *device, int cmd)
@@ -56,9 +70,6 @@ static int do_ioctl(char *device, int cmd)
 
 	return error;
 }
-
-#define BUFFER_SIZE	4096
-#define MAX_MICROCODE	2000000
 
 /* 
  * The update has two stages; 
@@ -125,9 +136,6 @@ static int do_update(char *device, char *filename)
 
 	close(outfd);
 
-	if (freeflag)
-		exit(do_ioctl(device, MICROCODE_IOCFREE));
-
 	return 0;
 }
 
@@ -135,16 +143,21 @@ int main(int argc, char *argv[])
 {
 	int c;
 	static char device[2048];
+	static char filename[2048];
+	int upload=0, freeflag=0;
+	int return_code;
 
 	progname = argv[0];
+
 	if (argc == 1) {
 		usage();
 		exit(1);
 	}
-
-	strcpy(device, "/dev/cpu/microcode");
 	
-	while (EOF != (c = getopt(argc, argv, "hid:f:"))) {
+	strcpy(device, MICROCODE_DEVICE_DEFAULT);
+	strcpy(filename, MICROCODE_FILE_DEFAULT);
+	
+	while (EOF != (c = getopt(argc, argv, "hiud:f:"))) {
 		switch(c) {
 			case 'h':
 				usage();
@@ -154,18 +167,29 @@ int main(int argc, char *argv[])
 				strcpy(device, optarg);
 				break;
 
-			case 'i':
-				freeflag = 1;
+			case 'i': /* send the ioctl to free the buffers */
+				freeflag++;
 				break;
 
-			case 'f':
-				exit(do_update(device, optarg));
+			case 'u': /* do a microcode upload */
+				upload++;
+				break;
+
+			case 'f': /* set microcode file to optarg and upload */
+				upload++;
+				strcpy(filename, optarg);
+				break;
 
 			case '?':
 				usage();
 				exit(1);
 		}
 	}
+
+	if (upload)
+		if((return_code = do_update(device, filename)))
+			exit(return_code);
+		
 	if (freeflag)
 		exit(do_ioctl(device, MICROCODE_IOCFREE));
 			

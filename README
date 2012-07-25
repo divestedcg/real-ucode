@@ -1,5 +1,8 @@
 1.0 	09 June 2000, Simon Trimmer <simon@veritas.com>
 	Initial release.
+1.01	19 June 2000, Simon Trimmer <simon@veritas.com>
+	general tidy up and argument sequencing fix
+	added default microcode filename and -u switch
 
 ***************************************************************************
 >>> What it does
@@ -113,7 +116,7 @@ microcode_ctl: there may be messages from the driver in your system log.
 ***************************************************************************
 
 Running the utility with the option -i will signal the driver to release
-and buffers it may have. It may be used in conjunction with -f if it
+any buffers it may have. It may be used in conjunction with -f if it
 precedes it.
 
 
@@ -124,7 +127,12 @@ precedes it.
 To update your microcode and free the internal buffer on every system boot
 you'll need to add a line like the following to /etc/rc.d/rc.local
 
-/usr/local/bin/microcode_ctl -if /etc/microcode
+/usr/local/bin/microcode_ctl -iu
+
+or to specify another microcode file 
+
+/usr/local/bin/microcode_ctl -if /etc/microcode.dat
+
 
 Simple as that. Problems? Contact either myself at simon@veritas.com or
 Tigran at tigran@veritas.com

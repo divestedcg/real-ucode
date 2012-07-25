@@ -1,2 +1,5 @@
 1.0 	09 June 2000,	Simon Trimmer <simon@veritas.com>
 	Initial release.
+1.01	19 June 2000,	Simon Trimmer <simon@veritas.com>
+	general tidy up and argument sequencing fix
+	added default microcode filename and -u switch
