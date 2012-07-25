@@ -1,0 +1,172 @@
+#!/bin/bash
+# chkconfig: 2345 80 20
+# description: script to apply cpu microcode
+# portability changes welcome!
+
+# vars:
+#
+# START			distribution specific way of kicking programs
+# END			distribution specific way of checking return status
+# PROGRAM		the executable to run
+# ARGUMENTS		the argument we're going to call PROGRAM with
+# VERBOSE		put yes/no (case sensitive) to verbose or to be quiet
+
+DEVICE=/dev/cpu/microcode
+ARGUMENTS=-Qu
+RETVAL=0
+
+# Sort out the executable to run.
+if [ -x /usr/sbin/microcode_ctl ]; then
+	PROGRAM=/usr/sbin/microcode_ctl
+elif [ -x /usr/local/sbin/microcode_ctl ]; then
+	PROGRAM=/usr/local/sbin/microcode_ctl
+else
+	echo "$0: Can't find location of microcode_ctl binary, aborting."
+	exit 1
+fi
+
+# Sort out sourcing in the distribution specific library functions
+# and the command to run them.
+if [ -f /etc/redhat-release ]; then
+	. /etc/rc.d/init.d/functions
+	START=daemon
+	END=
+elif [ -f /etc/SuSE-release ]; then
+	START=
+	END="rc_status -v"
+	. /etc/rc.config
+	. /etc/rc.status
+elif [ -f /etc/debian_release ]; then
+	. /etc/default/rcS
+	if [ "$VERBOSE" != "no" ] ; then
+		END=debian_end
+	fi
+elif [ -f /etc/slackware-version ]; then
+	. /etc/rc.d/rc.sysvinit
+	if [ "$VERBOSE" != "no" ]; then
+		END=slack_end
+	fi
+else
+	echo "$0: Can't guess distribution, aborting!"
+	exit 1
+fi
+
+# Lets just be sure we have a device file...
+if [ ! -e $DEVICE ];
+then 
+	echo "$0: microcode device $DEVICE doesn't exist?"
+	exit 1
+elif [ ! -c $DEVICE ];
+then
+	echo "$0: $DEVICE not a character device?"
+	exit 1
+fi
+
+# hehehe, I really hate this :)
+function copyreturncode ()
+{
+	RETVAL=$?
+	return $RETVAL
+}
+
+
+function debian_end ()
+{
+	if [ $? -eq 0 ];
+	then
+		echo "done."
+	else
+		echo "failed."
+	fi
+}
+
+# Generic function "a la Red Hat"
+MOVE_TO_COL="echo -en \\033[60G"
+SETCOLOR_SUCCESS="echo -en \\033[1;32m"
+SETCOLOR_FAILURE="echo -en \\033[1;31m"
+SETCOLOR_NORMAL="echo -en \\033[0;39m"
+
+echo_success() {
+	$MOVE_TO_COL
+	echo -n "[  "
+	$SETCOLOR_SUCCESS
+	echo -n "OK"
+	$SETCOLOR_NORMAL
+	echo -n "  ]"
+	echo -ne "\r"
+	echo ""
+}
+
+echo_failure() {
+	$MOVE_TO_COL
+	echo -n "["
+	$SETCOLOR_FAILURE
+	echo -n "FAILED"
+	$SETCOLOR_NORMAL
+	echo -n "]"
+	echo -ne "\r"
+	echo ""
+}
+
+
+# echo OK in green if is success, FAILED in red is failed
+function slack_end ()
+{
+	if [ $RETVAL -eq 0 ];
+	then
+		echo
+		echo -n "$0($$)"
+		echo_success
+	else
+		echo
+		echo -n "$0($$)"
+		echo_failure
+	fi
+
+	if [ $RETVAL -eq 3 ]; then
+		echo "Cannot find source file \"/etc/microcode.dat\""
+	fi
+}
+
+# perform the update
+function doit ()
+{
+	if [ "$VERBOSE" != no ] ; then
+		echo "Applying Intel IA32 Microcode update... "
+	fi
+
+	$START $PROGRAM $ARGUMENTS
+	copyreturncode
+	if [ "$VERBOSE" != no ] ; then
+		$END
+	fi
+
+	# trap the most common case, errno 19 = no device
+	if [ $RETVAL -eq 19 ];
+	then
+		grep MICROCODE /usr/include/linux/autoconf.h | grep -q ^#define
+		if [ $? -ne 0 ];
+		then
+			echo "$0: This kernel doesn't appear to have microcode device support?"
+		fi
+	fi
+	echo
+}
+
+
+case "$1" in
+  start|""|reload|force-reload|restart)
+	doit
+	exit $RETVAL
+	;;
+  stop)
+	;;
+  status)
+	# I wonder when the driver will let us do this...
+	# maybe I'll write it ;)
+	echo "$0: reading microcode status is not yet supported"
+	;;
+  *)
+	echo "$0 usage: microcode {start|restart}"
+	exit 1
+esac
