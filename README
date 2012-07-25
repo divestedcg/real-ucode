@@ -110,15 +110,6 @@ microcode_ctl: error writing to '/dev/cpu/microcode' errno=5 (Input/output error
 microcode_ctl: there may be messages from the driver in your system log.
 
 ***************************************************************************
->>> freeing off the internal buffer
-***************************************************************************
-
-Running the utility with the option -i will signal the driver to release
-any buffers it may have. It may be used in conjunction with -f if it
-precedes it.
-
-
-***************************************************************************
 >>> updating every system boot
 ***************************************************************************
 
@@ -126,16 +117,15 @@ A simple script has been included for systems to apply the microcode
 update on boot. The script is a good illustration on how to use the
 utility but it may be useful to run through some basic usage.
 
-Without using the provided startup script, to update your microcode and
-free the internal buffer on every system boot you'll need to add a line
-like the following to /etc/rc.d/rc.local (where prefix indicates the 
-location of the binary)
+Without using the provided startup script, to update your microcode on every
+system boot you'll need to add a line like the following to /etc/rc.d/rc.local
+(where prefix indicates the location of the binary)
 
-prefix/microcode_ctl -iu
+prefix/microcode_ctl -u
 
 or to specify another microcode file 
 
-prefix/microcode_ctl -if /etc/microcode.dat
+prefix/microcode_ctl -f /etc/microcode.dat
 
 Simple as that. Problems? Contact either myself at simon@urbanmyth.org or
 Tigran at tigran@veritas.com

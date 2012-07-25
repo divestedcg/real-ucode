@@ -1,10 +1,10 @@
 .\" this is a comment`
-.TH MICROCODE_CTL "8" "17 January 2001" "microcode_ctl"
+.TH MICROCODE_CTL "8" "30 October 2004" "microcode_ctl"
 .SH NAME
 microcode_ctl \- microcode utility for Intel IA32 processors
 .SH SYNOPSIS
 .B microcode_ctl
-[\fI\-h\fR] [\fI\-i\fR] [\fI\-u\fR [\fI\-q\fR]] [\fI\-Q\fR] [\fI\-f microcode\fR]
+[\fI\-h\fR] [\fI\-u\fR [\fI\-q\fR]] [\fI\-Q\fR] [\fI\-f microcode\fR]
 .br
 .SH DESCRIPTION
 ." Add any additional description here
@@ -31,9 +31,6 @@ back to the old microcode.
 \fB\-h\fR
 display usage and exit
 .TP
-\fB\-i\fR
-release any buffers held in microcode driver
-.TP
 \fB\-u\fR
 upload microcode (from default filename)
 .TP
@@ -48,8 +45,8 @@ run silently even on failure
 .PD
 .SH EXAMPLE
 .TP
-microcode_ctl -iu
-Upload and free kernel buffers
+microcode_ctl -u
+Upload microcode using defaults
 .SH FILES
 .TP
 /etc/microcode.dat
@@ -60,7 +57,7 @@ Microcode utility written by Simon Trimmer
 .br
 Linux Kernel driver written by Tigran Aivazian.
 .SH "REPORTING BUGS"
-Report bugs to either Simon Trimmer <simon@veritas.com> or
+Report bugs to either Simon Trimmer <simon@urbanmyth.org> or
 Tigran Aivazian <tigran@veritas.com>
 .SH COPYRIGHT
 Copyright \(co 2000 VERITAS Software

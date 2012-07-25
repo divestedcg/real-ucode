@@ -12,7 +12,7 @@
 # VERBOSE		put yes/no (case sensitive) to verbose or to be quiet
 
 DEVICE=/dev/cpu/microcode
-ARGUMENTS=-Qui
+ARGUMENTS=-Qu
 RETVAL=0
 
 # Sort out the executable to run.

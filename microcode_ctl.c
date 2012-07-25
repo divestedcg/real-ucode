@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 	strcpy(device, MICROCODE_DEVICE_DEFAULT);
 	strcpy(filename, MICROCODE_FILE_DEFAULT);
 	
-	while (EOF != (c = getopt(argc, argv, "hqQiud:f:"))) {
+	while (EOF != (c = getopt(argc, argv, "hqQud:f:"))) {
 		switch(c) {
 			case 'h':
 				usage();
