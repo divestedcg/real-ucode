@@ -1,5 +1,5 @@
 %define name    microcode_ctl
-%define version 1.05
+%define version 1.06
 %define release 1
 %define serial  1
 %define prefix  /usr
@@ -38,31 +38,49 @@ make
 
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && [ -d $RPM_BUILD_ROOT ] && rm -r $RPM_BUILD_ROOT;
-make DESTDIR=$RPM_BUILD_ROOT PREFIX=%{prefix} install device clean
+make DESTDIR=$RPM_BUILD_ROOT PREFIX=%{prefix} install clean
 
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && [ -d $RPM_BUILD_ROOT ] && rm -r $RPM_BUILD_ROOT;
 
-%files
+%files -f microcode-filelist
 %defattr(-,root,root)
 %{prefix}/sbin/microcode_ctl
 %{prefix}/man/*/*
 /etc/microcode.dat
-/etc/rc.d/init.d/*
-/dev/cpu/microcode
+# /etc/init.d/microcode_ctl
 
 %post
+if [ ! -f /dev/.devfsd ];
+then
+	# devfs is not installed
+	mkdir -p /dev/cpu
+	if [ ! -c /dev/cpu/microcode ];
+	then
+		mknod /dev/cpu/microcode c 10 184
+	fi
+fi
+
 if [ -x /sbin/chkconfig ];
 then
 	chkconfig --add microcode_ctl
 elif [ -f /etc/SuSE-release ];
 then
 	# XXX is there a better way to do this under SuSE?
-	ln -s ../microcode_ctl /sbin/init.d/rc2.d/S80microcode_ctl
-	ln -s ../microcode_ctl /sbin/init.d/rc2.d/K20microcode_ctl
+	if [ -d /etc/init.d ];
+	then
+		# Suse 7.1
+		ln -s /etc/init.d/microcode_ctl /etc/init.d/rc2.d/S80microcode_ctl
+		ln -s /etc/init.d/microcode_ctl /etc/init.d/rc2.d/K20microcode_ctl
+	else
+		# Suse 7.0, same style as Suse.
+		ln -s ../microcode_ctl /etc/rc.d/rc2.d/S80microcode_ctl
+		ln -s ../microcode_ctl /etc/rc.d/rc2.d/K20microcode_ctl
+	fi
 else
 	echo "RPM: Unknown system, leaving system startup alone"
 fi
+
 
 %preun
 if [ -x /sbin/chkconfig ];
@@ -70,6 +88,20 @@ then
 	chkconfig --del microcode_ctl
 elif [ -f /etc/SuSE-release ];
 then
-	rm -f /sbin/init.d/rc2.d/S80microcode_ctl
-	rm -f /sbin/init.d/rc2.d/K20microcode_ctl
+	if [ -d /etc/init.d ];
+	then
+		# Suse 7.1
+		rm -f /etc/init.d/rc2.d/S80microcode_ctl
+		rm -f /etc/init.d/rc2.d/K20microcode_ctl
+	else
+		# Suse 7.0
+		rm -f /etc/rc.d/rc2.d/S80microcode_ctl
+		rm -f /etc/rc.d/rc2.d/K20microcode_ctl
+	fi
+fi
+
+if [ ! -f /dev/.devfsd ];
+then
+	rm -f /dev/cpu/microcode
+	rmdir --ignore-fail-on-non-empty /dev/cpu
 fi

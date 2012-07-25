@@ -25,7 +25,8 @@ MICDIR		= /etc
 
 RCFILE		= microcode_ctl.start
 RCFILEFINAL	= microcode_ctl
-RCDIR		= /etc/rc.d
+# this is a bit nasty...
+RCDIR		= $(shell if [ -d /etc/init.d ]; then echo "/etc"; else echo "/etc/rc.d"; fi)
 RCHOMEDIR	= init.d
 RCFILETO	= $(RCDIR)/$(RCHOMEDIR)
 
@@ -33,6 +34,7 @@ all: microcode_ctl
 
 microcode_ctl: microcode_ctl.c
 	$(CC) $(CFLAGS) -o $(PROGRAM) microcode_ctl.c
+	echo "$(RCDIR)/$(RCHOMEDIR)/microcode_ctl" > microcode-filelist
 
 clean:
 	rm -f $(PROGRAM)

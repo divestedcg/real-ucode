@@ -9,6 +9,7 @@
 # END			distribution specific way of checking return status
 # PROGRAM		the executable to run
 # ARGUMENTS		the argument we're going to call PROGRAM with
+# VERBOSE		put yes/no (case sensitive) to verbose or to be quiet
 
 DEVICE=/dev/cpu/microcode
 ARGUMENTS=-Qui
@@ -37,8 +38,13 @@ elif [ -f /etc/SuSE-release ]; then
 	. /etc/rc.status
 elif [ -f /etc/debian_release ]; then
 	. /etc/default/rcS
-	if [ "$VERBOSE" != no ] ; then
+	if [ "$VERBOSE" != "no" ] ; then
 		END=debian_end
+	fi
+elif [ -f /etc/slackware-version ]; then
+	. /etc/rc.d/rc.sysvinit
+	if [ "$VERBOSE" != "no" ]; then
+		END=slack_end
 	fi
 else
 	echo "$0: Can't guess distribution, aborting!"
@@ -61,8 +67,8 @@ function copyreturncode ()
 {
 	RETVAL=$?
 	return $RETVAL
-
 }
+
 
 function debian_end ()
 {
@@ -74,6 +80,55 @@ function debian_end ()
 	fi
 }
 
+# Generic function "a la Red Hat"
+MOVE_TO_COL="echo -en \\033[60G"
+SETCOLOR_SUCCESS="echo -en \\033[1;32m"
+SETCOLOR_FAILURE="echo -en \\033[1;31m"
+SETCOLOR_NORMAL="echo -en \\033[0;39m"
+
+echo_success() {
+	$MOVE_TO_COL
+	echo -n "[  "
+	$SETCOLOR_SUCCESS
+	echo -n "OK"
+	$SETCOLOR_NORMAL
+	echo -n "  ]"
+	echo -ne "\r"
+	echo ""
+}
+
+echo_failure() {
+	$MOVE_TO_COL
+	echo -n "["
+	$SETCOLOR_FAILURE
+	echo -n "FAILED"
+	$SETCOLOR_NORMAL
+	echo -n "]"
+	echo -ne "\r"
+	echo ""
+}
+
+
+# echo OK in green if is success, FAILED in red is failed
+function slack_end ()
+{
+	if [ $RETVAL -eq 0 ];
+	then
+		echo
+		echo -n "$0($$)"
+		echo_success
+	else
+		echo
+		echo -n "$0($$)"
+		echo_failure
+	fi
+
+	if [ $RETVAL -eq 3 ]; then
+		echo "Cannot find source file \"/etc/microcode.dat\""
+	fi
+}
+
+# perform the update
 function doit ()
 {
 	if [ "$VERBOSE" != no ] ; then
@@ -82,7 +137,9 @@ function doit ()
 
 	$START $PROGRAM $ARGUMENTS
 	copyreturncode
-	$END
+	if [ "$VERBOSE" != no ] ; then
+		$END
+	fi
 
 	# trap the most common case, errno 19 = no device
 	if [ $RETVAL -eq 19 ];
@@ -108,7 +165,7 @@ case "$1" in
 	# I wonder when the driver will let us do this...
 	# maybe I'll write it ;)
 	echo "$0: reading microcode status is not yet supported"
-        ;;
+	;;
   *)
 	echo "$0 usage: microcode {start|restart}"
 	exit 1
