@@ -1,136 +1,10 @@
 ***************************************************************************
 >>> What it does
 ***************************************************************************
-
-The microcode_ctl utility is a companion to the IA32 microcode driver
-written by Tigran Aivazian <tigran@aivazian.fsnet.co.uk>. The utility has
-two uses:
-
-a) it decodes and sends new microcode to the kernel driver to be uploaded
-   to Intel IA32 family processors. (Pentium Pro, PII, Celeron, PIII, 
-   Xeon, Pentium 4 etc, x86_64)
-b) it signals the kernel driver to release any buffers it may hold
-
-The microcode update is volatile and needs to be uploaded on each system
-boot i.e. it doesn't reflash your cpu permanently, reboot and it reverts
-back to the old microcode.
-
-
-***************************************************************************
->>> got an AMD or any non-Intel processor?
-***************************************************************************
-
-This driver is designed for Intel microprocessors only, it will not work
-with AMD or any other non-Intel processors as they don't support microcode
-updates or they support it in a manner different from Intel's specs.
-
-
-***************************************************************************
->>> how to compile the kernel to include support for microcode update
-***************************************************************************
-
-The microcode driver is a feature of the Linux kernel added to 2.4.0-test1 and
-2.2.18, it needs to be enabled at compile time and it may be compiled as a
-module.  CONFIG_MICROCODE is in the "Processor type and features" kernel
-configuration section.  This utility relates to kernel microcode driver v1.04
-or newer.
-
-The kernel driver supports regular misc device and devfs, to create the device
-node on a non-devfs system as root type:
-
-# make device
-
-this is equivalent to
-
-# mkdir -p /dev/cpu/
-# mknod /dev/cpu/microcode c 10 184
-
-If you are using devfs, then you can either access the driver via regular
-file cpu/microcode or via misc character device misc/microcode, both
-of which are created automatically under the devfs mountpoint.
-
-You may also find your microcode device node under /dev/cpu/0/microcode
-
-***************************************************************************
->>> how to compile it
-***************************************************************************
-
-The utility has a simple Makefile to compile and install the software,
-there are three targets of interest;
-
-- "make all" will build the program executable
-- "make install" will copy the files into standard locations
-- "make device" will create a microcode device node
-
-when building from the source it is recommended to execute "make install
-device" or use the rpm packaging feature "rpm -ta microcode_ctl-n.tar.gz"
-
-***************************************************************************
->>> getting Intel microcode
-***************************************************************************
-
-This package has a file called microcode.dat containing Intel microcode,
-normally this file will be installed as /etc/microcode.dat
-
-Intel IA32 microcode updates will be hosted on this utility's web page:
-http://www.urbanmyth.org/microcode/
-
-***************************************************************************
->>> how to invoke it
-***************************************************************************
-
-The utility installs by default into /usr/local whilst the RPM package
-installs files into /usr - the supplied system startup script is aware of
-both locations. The utility can be invoked simply as "microcode_ctl -u"
-
-The utility will print something like:
-
-microcode_ctl: writing microcode (length: 98304)
-microcode_ctl: microcode successfuly written to /dev/cpu/microcode
-
-The driver will send messages to the system log (/var/log/messages) like:
-
-microcode: CPU1 updated from revision 7 to 14, date=09101999
-microcode: CPU0 updated from revision 7 to 14, date=09101999
-
-The driver won't let you downgrade or apply the same microcode as the
-version it is running, it is also possible that the current version of the
-microcode does not include one suitable for your processor(s). In these
-cases the utility will fail with EIO and the driver will print an
-explanation into the system log. For example, refusal to downgrade the
-microcode produces this message in the log:
-
-microcode: CPU1 not 'upgrading' to earlier revision 14 (current=14)
-microcode: CPU0 not 'upgrading' to earlier revision 14 (current=14)
-
-which was caused by the second invocation of microcode_ctl:
-
-# microcode_ctl -f microcode.dat
-microcode_ctl: writing microcode (length: 98304)
-microcode_ctl: error writing to '/dev/cpu/microcode' errno=5 (Input/output error)
-microcode_ctl: there may be messages from the driver in your system log.
-
-***************************************************************************
->>> updating every system boot
-***************************************************************************
-
-A simple script has been included for systems to apply the microcode
-update on boot. The script is a good illustration on how to use the
-utility but it may be useful to run through some basic usage.
-
-Without using the provided startup script, to update your microcode on every
-system boot you'll need to add a line like the following to /etc/rc.d/rc.local
-(where prefix indicates the location of the binary)
-
-prefix/microcode_ctl -u
-
-or to specify another microcode file 
-
-prefix/microcode_ctl -f /etc/microcode.dat
-
-Simple as that. Problems? Contact either myself at simon@urbanmyth.org or
-Tigran at tigran@aivazian.fsnet.co.uk
-
+Deploy an Intel and AMD microcode. This tool is obsolete and the microcode
+is the subject to be distributed via kernel-firmware, however Intel still
+does not supply the microcode in a form consumable by the Linux's microcode
+driver. So that this tool transform Intel's microcode as well as deploy it.
 
 ***************************************************************************
 >>> Contributors
@@ -138,22 +12,13 @@ Tigran at tigran@aivazian.fsnet.co.uk
 Credit where credit is due; the following people contributed ideas or
 patches. Thanks :)
 
-Richard Schaal <richard.schaal@intel.com>
-Andreas Steinmetz <ast@domdv.de>
-Giacomo Catenazzi <cate@neper.ethz.ch>
-John Moore <johnmoore@iee.org>
-Oliver Fassbender <olli@intrepid.de>
-Peter Kovacs <pkovacs@webmachines.com>
-Alan Eldridge <alane@geeksrus.net>
-Keven Belanger <kevenb@nwb.qc.ca>
-Robb Romans <robb@austin.ibm.com>
+Kay Sievers <kay.sievers@vrfy.org>
 
 ***************************************************************************
 >>> Special thanks
 ***************************************************************************
+o Advanced Micro Devices, Inc and Intel Corporation, for supplying
+  microcode update data and publishing the specifications that enabled us
+  to write microcode driver for Linux.
 
-o Intel Corporation, for supplying microcode update data and publishing
-  the specifications that enabled us to write microcode driver for Linux.
-
-  
-- Simon Trimmer <simon@urbanmyth.org> http://www.urbanmyth.org
+- Anton Arapov <anton@redhat.com> http://fedorahosted.org/microcode_ctl/

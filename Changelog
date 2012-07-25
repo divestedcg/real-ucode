@@ -1,64 +1,6 @@
-1.0 	09 June 2000,	Simon Trimmer <simon@veritas.com>
-	Initial release.
-1.01	19 June 2000,	Simon Trimmer <simon@veritas.com>
-	general tidy up and argument sequencing fix
-	added default microcode filename and -u switch
-1.02    29 June 2000,   Simon Trimmer <simon@veritas.com>
-	fix from Richard Schaal <richard.schaal@intel.com>
-	to be more flexible with the file formats.
-	added a man page into section 8
-1.03	07 Sept 2000,   Simon Trimmer <simon@veritas.com>
-	a few small fixes from Tigran Aivazian <tigran@veritas.com>
-	Makefile changes (abstraction for packaging and portability)
-	more Makefile changes from Giacomo Catenazzi <cate@neper.ethz.ch>
-	RPM .spec file
-	integrate 2.2.16 backport from Andreas Steinmetz <ast@domdv.de>
-	added Makefile device node creation (to be tested with devfs)
-	added the quiet and very quiet options (-q and -Q)
-	added a redhat style rc startup script
-1.04	17 January 2001, Simon Trimmer <simon@veritas.com>
-	startup script portability changes (tar, rpm and SuSE)
-	build RPM direct from tar file (rpm -ta microcode_ctl-x.xx.tar.gz)
-	readme tidyup
-	replace P6 with IA32 - the Pentium 4 is of family 15
-	new microcode release from intel
-1.05	31 May 2001, Simon Trimmer <simon@veritas.com>
-	new microcode release from Intel (01 May 2001 arrived this morning)
-	Debian startup script fixes from Peter Kovacs <pkovacs@webmachines.com>
-	added asm/cache.h to make compatible with Andrea Arcangeli's patches.
-1.06	11 Jun 2001, Simon Trimmer <simon@veritas.com>
-	deferred device install for devfs: Alan Eldridge <alane@geeksrus.net>
-	Suse portability changes: Robb Romans <robb@austin.ibm.com>
-	Slackware portability changes: Keven Belanger <kevenb@nwb.qc.ca>
-1.07	16 March 2004, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.06 tarball with newer microcode from Intel
-1.08	12 August 2004, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.07 tarball with newer microcode from Intel
-1.09	02 Sept 2004, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.08 tarball with newer microcode from Intel
-1.10	25 October 2004, Simon Trimmer <simon@urbanmyth.org>
-	updated with new microcode from Intel
-	applied patch from Tigran for x86_64 support and some cleanups
-1.11	30 October 2004, Simon Trimmer <simon@urbanmyth.org>
-	remove some old references to the old -i free buffer option
-1.12	13 September 2005, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.11 tarball with newer microcode from Intel
-1.13	19 January 2006, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.12 tarball with newer microcode from Intel
-1.14	28 June 2006, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.13 tarball with newer microcode from Intel
-1.15	19 Sept 2006, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.14 tarball with newer microcode from Intel
-1.16	24 January 2007, Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.15 tarball with newer microcode from Intel and correct
-	Tigran's email address to tigran@aivazian.fsnet.co.uk
-1.17	36 April 2007,  Simon Trimmer <simon@urbanmyth.org>
-	updated the 1.16 tarball with newer microcode from Intel
-1.18	25 July 2012, Anton Arapov <anton@redhat.com>
-	remove the microcode tarball from the tree
-	update microcode_ctl.8 manpage
-	fix a segfault that may be triggered by very long parameter
-	fix memory leak
-	add latest microcode blobs from Intel and AMD
-	clean up spec file
+2.0   25 July 2012, Anton Arapov <anton@redhat.com>
+      Initial release.
 
+--
+homepage: http://fedorahosted.org/microcode_ctl/
+old releases archive: https://fedorahosted.org/released/microcode_ctl

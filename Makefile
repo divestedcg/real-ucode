@@ -1,6 +1,5 @@
 # Makefile part of microcode_ctl package
 #
-# Copyright 2000 (c) Simon Trimmer, Tigran Aivazian.
 # Copyright 2012 (c) Anton Arapov.
 #
 # This program is free software; you can redistribute it and/or
@@ -8,82 +7,48 @@
 # as published by the Free Software Foundation; either version
 # 2 of the License, or (at your option) any later version.
 
-PROGRAM         = microcode_ctl
-MANPAGE         = microcode_ctl.8
+PROGRAM         = intel-microcode2ucode
 MICROCODE_INTEL = microcode-20120606.tgz
 MICROCODE_AMD   = amd-ucode-2012-01-17.tar
 
 INS             = install
 CC              = gcc
-KERNELHEADER    = /usr/src/linux/include
-CFLAGS          = -g -Wall -O2 -I $(KERNELHEADER)
+CFLAGS          = -g -Wall -O2 
 
-DESTDIR         =
+DESTDIR         = 
 PREFIX          = /usr/local
 
 INSDIR          = $(PREFIX)/sbin
-MANDIR          = $(PREFIX)/share/man/man8
 DOCDIR          = $(PREFIX)/share/doc/microcode_ctl
 MICDIR          = /lib/firmware
 MICDIRAMD       = $(MICDIR)/amd-ucode
-
-RCFILE          = microcode_ctl.start
-RCFILEFINAL     = microcode_ctl
-# this is a bit nasty...
-RCDIR           = $(shell if [ -d /etc/init.d ]; then echo "/etc"; else echo "/etc/rc.d"; fi)
-RCHOMEDIR       = init.d
-RCFILETO        = $(RCDIR)/$(RCHOMEDIR)
+MICDIRINTEL     = $(MICDIR)/intel-ucode
 
 all: microcode_ctl
 
-microcode_ctl: microcode_ctl.c
-	$(CC) $(CFLAGS) -o $(PROGRAM) microcode_ctl.c
-	mkdir intel-ucode amd-ucode
-	tar xfz $(MICROCODE_INTEL) -C intel-ucode
-	tar --strip-components 1 -xf $(MICROCODE_AMD) -C amd-ucode
-	echo "$(RCDIR)/$(RCHOMEDIR)/microcode_ctl" > microcode-filelist
+microcode_ctl: intel-microcode2ucode.c
+	$(CC) $(CFLAGS) -o $(PROGRAM) intel-microcode2ucode.c
+	tar -xOf $(MICROCODE_INTEL) | ./intel-microcode2ucode - >/dev/null
+	mkdir amd-ucode && tar --strip-components 1 -xf $(MICROCODE_AMD) -C amd-ucode
 
 clean:
 	rm -rf $(PROGRAM) intel-ucode amd-ucode
 
 install:
-	$(INS) -d $(DESTDIR)$(INSDIR) $(DESTDIR)$(MICDIRAMD) \
-			$(DESTDIR)$(MANDIR) $(DESTDIR)$(RCFILETO) \
-			$(DESTDIR)$(RCLINKTO) $(DESTDIR)$(DOCDIR)
+	$(INS) -d $(DESTDIR)$(INSDIR) $(DESTDIR)$(DOCDIR) \
+		$(DESTDIR)$(MICDIRAMD) $(DESTDIR)$(MICDIRINTEL)
 	$(INS) -m 755 $(PROGRAM) $(DESTDIR)$(INSDIR)
-	$(INS) -m 644 $(MANPAGE) $(DESTDIR)$(MANDIR)
-	gzip -9f $(DESTDIR)$(MANDIR)/$(MANPAGE)
-	$(INS) -m 755 $(RCFILE) $(DESTDIR)$(RCFILETO)/$(RCFILEFINAL)
-	$(INS) -m 644 intel-ucode/microcode.dat $(DESTDIR)$(MICDIR)
-	$(INS) -m 644 amd-ucode/microcode_amd.bin $(DESTDIR)$(MICDIR)/amd-ucode/
-	$(INS) -m 644 amd-ucode/microcode_amd_fam15h.bin $(DESTDIR)$(MICDIR)/amd-ucode/
-	$(INS) -m 644 amd-ucode/microcode_amd.bin.README \
-		$(DESTDIR)$(DOCDIR)/README.microcode_amd.bin
-	$(INS) -m 644 amd-ucode/microcode_amd_fam15h.bin.README \
-		$(DESTDIR)$(DOCDIR)/README.microcode_amd_fam15h.bin
+	$(INS) -m 644 README $(DESTDIR)$(DOCDIR)
+	$(INS) -m 644 intel-ucode/* $(DESTDIR)$(MICDIRINTEL)
+	$(INS) -m 644 amd-ucode/*.bin $(DESTDIR)$(MICDIRAMD)
+	$(INS) -m 644 amd-ucode/*.bin.README $(DESTDIR)$(DOCDIR)
 	$(INS) -m 644 amd-ucode/LICENSE $(DESTDIR)$(DOCDIR)/LICENSE.microcode_amd
 	$(INS) -m 644 amd-ucode/README $(DESTDIR)$(DOCDIR)/README.microcode_amd
 	$(INS) -m 644 amd-ucode/INSTALL $(DESTDIR)$(DOCDIR)/INSTALL.microcode_amd
 
-ifndef DESTDIR
-		chkconfig --add $(RCFILEFINAL)
-else
-		echo "MAKE: Skipping chkconfig operation (rpm build?)"
-endif
-
-device:
-	mkdir -p $(DESTDIR)/dev/cpu
-	mknod $(DESTDIR)/dev/cpu/microcode c 10 184
-
 uninstall:
-ifndef DESTDIR
-	chkconfig --del $(RCFILEFINAL)
-endif
-# shame there isn't reverse of install...
 	rm -rf $(DESTDIR)$(INSDIR)/$(PROGRAM) \
-		$(DESTDIR)$(MANDIR)/$(MANPAGE).gz \
-		$(DESTDIR)$(RCFILETO)/$(RCFILEFINAL)
+		$(DESTDIR)$(MICDIRINTEL) \
 		$(DESTDIR)$(MICDIRAMD) \
-		$(DESTDIR)$(MICDIR)/microcode.dat \
 		$(DESTDIR)$(DOCDIR)
 
