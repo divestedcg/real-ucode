@@ -8,7 +8,7 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM		= microcode_ctl
-MICROCODE	= intel-ia32microcode-05Jan2006.txt
+MICROCODE	= intel-ia32microcode-10May2006.txt
 MANPAGE		= microcode_ctl.8
 
 INS		= install
