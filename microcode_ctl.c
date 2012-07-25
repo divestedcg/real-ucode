@@ -14,7 +14,10 @@
  *	1.01	19 June 2000,	Simon Trimmer <simon@veritas.com>
  * 		general tidy up and argument sequencing fix
  * 		added default microcode filename and -u switch
- * 				
+ * 	1.02	29 June 2000,	Simon Trimmer <simon@veritas.com>
+ * 		fix from Intel to be more flexible with the file
+ * 		formats.
+ *
  */
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -96,7 +99,11 @@ static int do_update(char *device, char *filename)
 	pos = microcode;
 
 	while(fgets(line_buffer, BUFFER_SIZE, fd) != NULL) {
-		if(*line_buffer != '/'){
+		 /*
+		  * Data lines will are of the form "%x, %x, %x, %x", therefore
+		  * lines start with a 0
+		  */
+                if(*line_buffer == '0'){
 			sscanf(line_buffer, "%x, %x, %x, %x", pos,
 					(pos + 1), (pos + 2), (pos + 3));
 			pos += 4;

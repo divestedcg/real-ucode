@@ -1,0 +1,69 @@
+.\" this is a comment`
+.TH MICROCODE_CTL "8" "21 June 2000" "microcode_ctl" Veritas
+.SH NAME
+microcode_ctl \- microcode utility for Intel P6 processors
+.SH SYNOPSIS
+.B microcode_ctl
+[\fI\-h\fR] [\fI\-i\fR] [\fI\-u\fR] [\fI\-f microcode\fR]
+.br
+.SH DESCRIPTION
+." Add any additional description here
+.PP
+The microcode_ctl utility is a companion to the P6 microcode driver written
+by Tigran Aivazian <tigran@veritas.com>. The utility has two uses:
+.br
+.PP
+\fBa)\fR it decodes and sends new microcode to the kernel driver to be uploaded to Intel P6 family processors. (Pentium Pro, PII, PIII, Xeon etc)
+.PP
+\fBb)\fR it signals the kernel driver to release any buffers it may hold
+.br
+.PP
+The microcode update is volatile and needs to be uploaded on each system
+boot i.e. it doesn't reflash your cpu permanently, reboot and it reverts
+back to the old microcode.
+.br
+.TP
+\fB\-h\fR
+display usage and exit
+.TP
+\fB\-i\fR
+release any buffers held in microcode driver
+.TP
+\fB\-u\fR
+upload microcode (from default filename)
+.TP
+\fB\-f\fR
+upload microcode from named Intel formatted file
+.PD
+.SH EXAMPLE
+.TP
+microcode_ctl -iu
+Upload
+.SH FILES
+.TP
+/etc/microcode.dat
+The default microcode location
+.PD
+.SH AUTHOR
+Microcode utility written by Simon Trimmer
+.br
+Linux Kernel driver written by Tigran Aivazian.
+.SH "REPORTING BUGS"
+Report bugs to either Simon Trimmer <simon@veritas.com> or
+Tigran Aivazian <tigran@veritas.com>
+.SH COPYRIGHT
+Copyright \(co 2000 Veritas Software
+.br
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+.SH "SPECIAL THANKS"
+Thanks to the Intel Corporation, for supplying microcode update data and
+publishing the specifications that enabled us to write microcode driver for
+Linux.
+.br 
+.SH "SEE ALSO"
+The brave are recommended to view the driver source code located in the
+Linux Kernel source tree in arch/i386/kernel/microcode.c
+.PP
+Visit http://www.urbanmyth.org/microcode/ for more information
+and microcode updates.
