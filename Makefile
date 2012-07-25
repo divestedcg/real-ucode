@@ -1,6 +1,7 @@
 # Makefile part of microcode_ctl package
 #
 # Copyright 2000 (c) Simon Trimmer, Tigran Aivazian.
+# Copyright 2012 (c) Anton Arapov.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -8,7 +9,6 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM		= microcode_ctl
-MICROCODE	= intel-ia32microcode-23April2007.txt
 MANPAGE		= microcode_ctl.8
 
 INS		= install
@@ -45,7 +45,6 @@ install:
 			$(DESTDIR)$(RCLINKTO)
 
 	$(INS) -s -m 755 $(PROGRAM) $(DESTDIR)$(INSDIR)
-	$(INS) -m 644 $(MICROCODE) $(DESTDIR)$(MICDIR)/microcode.dat
 
 	$(INS) -m 644 $(MANPAGE) $(DESTDIR)$(MANDIR)
 	gzip -9f $(DESTDIR)$(MANDIR)/$(MANPAGE)
@@ -68,6 +67,5 @@ ifndef DESTDIR
 endif
 # shame there isn't reverse of install...
 	rm $(DESTDIR)$(INSDIR)/$(PROGRAM) \
-		$(DESTDIR)$(MICDIR)/microcode.dat \
 		$(DESTDIR)$(MANDIR)/$(MANPAGE).gz \
 		$(DESTDIR)$(RCFILETO)/$(RCFILEFINAL)
