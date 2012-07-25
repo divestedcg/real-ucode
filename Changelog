@@ -41,3 +41,5 @@
 	applied patch from Tigran for x86_64 support and some cleanups
 1.11	30 October 2004, Simon Trimmer <simon@urbanmyth.org>
 	remove some old references to the old -i free buffer option
+1.12	13 September 2005, Simon Trimmer <simon@urbanmyth.org>
+	updated the 1.11 tarball with newer microcode from Intel
