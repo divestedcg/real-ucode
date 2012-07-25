@@ -1,5 +1,5 @@
 %define name    microcode_ctl
-%define version 1.16
+%define version 1.17
 %define release 1
 %define serial  1
 %define prefix  /usr
