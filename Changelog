@@ -30,3 +30,5 @@
 	deferred device install for devfs: Alan Eldridge <alane@geeksrus.net>
 	Suse portability changes: Robb Romans <robb@austin.ibm.com>
 	Slackware portability changes: Keven Belanger <kevenb@nwb.qc.ca>
+1.07	16 March 2004, Simon Trimmer <simon@urbanmyth.org>
+	updated the 1.06 tarball with newer microcode from Intel

@@ -1,5 +1,5 @@
 %define name    microcode_ctl
-%define version 1.06
+%define version 1.07
 %define release 1
 %define serial  1
 %define prefix  /usr
@@ -12,7 +12,7 @@ Serial:         %{serial}
 Group:          System Environment/Base
 Copyright:      GPL
 Url:            http://www.urbanmyth.org/microcode/
-Vendor:         Simon Trimmer <simon@veritas.com>
+Vendor:         Simon Trimmer <simon@urbanmyth.org>
 Source:         %{name}-%{version}.tar.gz
 Buildroot:      /var/tmp/%{name}-%{version}-root
 
