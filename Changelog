@@ -60,4 +60,6 @@
 	fix a segfault that may be triggered by very long parameter
 	fix memory leak
 	add latest microcode blobs from Intel and AMD
+	switch to udev events instead of rc style startup
+	clean-up spec file
 
