@@ -59,4 +59,5 @@
 	update microcode_ctl.8 manpage
 	fix a segfault that may be triggered by very long parameter
 	fix memory leak
+	add latest microcode blobs from Intel and AMD
 
