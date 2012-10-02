@@ -8,7 +8,7 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM         = intel-microcode2ucode
-MICROCODE_INTEL = microcode-20120606.tgz
+MICROCODE_INTEL = microcode-20120606-v2.tgz
 MICROCODE_AMD   = amd-ucode-2012-01-17.tar
 
 INS             = install
