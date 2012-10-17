@@ -9,7 +9,7 @@
 
 PROGRAM         = intel-microcode2ucode
 MICROCODE_INTEL = microcode-20120606-v2.tgz
-MICROCODE_AMD   = amd-ucode-2012-01-17.tar
+MICROCODE_AMD   = amd-ucode-2012-09-10.tar
 
 INS             = install
 CC              = gcc
