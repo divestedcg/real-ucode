@@ -1,3 +1,6 @@
+2.1-1 14 August 2013, Anton Arapov <anton@redhat.com>
+      Intel CPU microcode update. 20130808
+
 2.1   27 July 2013, Anton Arapov <anton@redhat.com>
       Remove AMD CPU microcode. Moved to linux-firmware.
 
