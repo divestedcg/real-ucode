@@ -8,7 +8,7 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM         = intel-microcode2ucode
-MICROCODE_INTEL = microcode-20140430.tgz
+MICROCODE_INTEL = microcode-20140624.tgz
 
 INS             = install
 CC              = gcc
