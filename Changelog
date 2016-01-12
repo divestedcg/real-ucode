@@ -1,10 +1,13 @@
-2.1-7 03 February 2015, Anton Arapov <anton@descope.org>
+2.1-8 12 January 2016, Anton Arapov <arapov@gmail.com>
+      Intel CPU microcode update. 20151106
+
+2.1-7 03 February 2015, Anton Arapov <arapov@gmail.com>
       Intel CPU microcode update. 20150121
 
-2.1-6 21 September 2014, Anton Arapov <anton@descope.org>
+2.1-6 21 September 2014, Anton Arapov <arapov@gmail.com>
       Intel CPU microcode update. 20140913
 
-2.1-5 08 July 2014, Anton Arapov <anton@descope.org>
+2.1-5 08 July 2014, Anton Arapov <arapov@gmail.com>
       Intel CPU microcode update. 20140624
 
 2.1-4 01 May 2014, Anton Arapov <anton@redhat.com>
