@@ -8,13 +8,13 @@
 # 2 of the License, or (at your option) any later version.
 
 PROGRAM         = intel-microcode2ucode
-MICROCODE_INTEL = microcode-20160714.tgz
+MICROCODE_INTEL = microcode-20161104.tgz
 
 INS             = install
 CC              = gcc
-CFLAGS          = -g -Wall -O2 
+CFLAGS          = -g -Wall -O2
 
-DESTDIR         = 
+DESTDIR         =
 PREFIX          = /usr/local
 
 INSDIR          = $(PREFIX)/sbin
