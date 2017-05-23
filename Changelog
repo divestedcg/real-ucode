@@ -1,8 +1,11 @@
+2.1-12 23 May 2017, Anton Arapov <aarapov@redhat.com>
+      Intel CPU microcode update. 20170511
+
 2.1-11 02 December 2016, Anton Arapov <aarapov@redhat.com>
-       Intel CPU microcode update. 20161104
+      Intel CPU microcode update. 20161104
 
 2.1-10 21 July 2016, Anton Arapov <arapov@gmail.com>
-       Intel CPU microcode update. 20160714
+      Intel CPU microcode update. 20160714
 
 2.1-9 24 June 2016, Anton Arapov <arapov@gmail.com>
       Intel CPU microcode update. 20160607
