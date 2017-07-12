@@ -1,7 +1,7 @@
 Summary:        Tool to transform and deploy CPU microcode update for x86.
 Name:           microcode_ctl
 Version:        2.1
-Release:        12
+Release:        13
 Group:          System Environment/Base
 License:        GPLv2+ and Redistributable, no modification permitted
 URL:            http://fedorahosted.org/microcode_ctl
@@ -31,6 +31,5 @@ make DESTDIR=%{buildroot} PREFIX=%{_prefix} INSDIR=/usr/sbin install clean
 rm -rf %{buildroot}
 
 %files
-/usr/sbin/intel-microcode2ucode
 /lib/firmware/*
 %doc /usr/share/doc/microcode_ctl/*
