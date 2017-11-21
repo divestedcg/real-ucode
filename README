@@ -21,4 +21,4 @@ o Advanced Micro Devices, Inc and Intel Corporation, for supplying
   microcode update data and publishing the specifications that enabled us
   to write microcode driver for Linux.
 
-- Anton Arapov <arapov@gmail.com> http://fedorahosted.org/microcode_ctl/
+- Anton Arapov <aarapov@redhat.com> https://pagure.io/microcode_ctl/
