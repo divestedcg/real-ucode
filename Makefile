@@ -7,7 +7,7 @@
 # as published by the Free Software Foundation; either version
 # 2 of the License, or (at your option) any later version.
 
-MICROCODE_INTEL = microcode-20180108.tgz
+MICROCODE_INTEL = microcode-20180312.tgz
 
 INS             = install
 CC              = gcc
