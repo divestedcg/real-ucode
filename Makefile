@@ -7,7 +7,7 @@
 # as published by the Free Software Foundation; either version
 # 2 of the License, or (at your option) any later version.
 
-MICROCODE_INTEL = microcode-20180312.tgz
+MICROCODE_INTEL = microcode-20180425.tgz
 
 INS             = install
 CC              = gcc
@@ -21,7 +21,8 @@ MICDIR          = /lib/firmware
 MICDIRINTEL     = $(MICDIR)/intel-ucode
 
 all:
-	tar -xf $(MICROCODE_INTEL) intel-ucode
+	tar xf $(MICROCODE_INTEL) ./intel-ucode/* ./intel-ucode-with-caveats/* \
+	       	--one-top-level=intel-ucode --strip-components=2 --backup=simple
 
 clean:
 	rm -rf intel-ucode
