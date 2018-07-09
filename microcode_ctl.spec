@@ -32,4 +32,4 @@ rm -rf %{buildroot}
 
 %files
 /lib/firmware/*
-%doc /usr/share/doc/microcode_ctl/*
+%doc /usr/share/doc/microcode_ctl
