@@ -1,7 +1,7 @@
 Summary:        Intel microcode files from Platomav's repository
 Name:           microcode_ctl-platomav
-Version:        20190624
-Release:        7
+Version:        20190711
+Release:        1
 Group:          System Environment/Base
 License:        GPLv2+ and Redistributable, no modification permitted
 Buildroot:      %{_tmppath}/%{name}-%{version}-root
