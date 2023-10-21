@@ -3,8 +3,12 @@ if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as ro
 
 if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo "NOTE: you must first reboot if you haven't since last installing a kernel";
+	echo "Currently installed"
+	ls -lha /usr/lib/firmware/amd-ucode/microcode_amd_fam*.bin
+	echo "Pending install"
+	ls -lha /usr/lib/firmware/amd-ucode-real/microcode_amd_fam*.bin
 	echo "Installing updated microcode, to restore: dnf reinstall linux-firmware";
-	cp -fv /usr/lib/firmware/amd-ucode-real/*.bin /usr/lib/firmware/amd-ucode/;
+	cp -fv /usr/lib/firmware/amd-ucode-real/microcode_amd_fam*.bin /usr/lib/firmware/amd-ucode/;
 	echo "Invoking dracut";
 	dracut -f;
 	echo "Please reboot to enjoy new microcode :)";

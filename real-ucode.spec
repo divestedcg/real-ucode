@@ -1,6 +1,6 @@
 Name: real-ucode
 Version: 20231021
-Release: 1
+Release: 3
 Summary: Actually provides the latest CPU microcode for Intel and AMD
 License: proprietary
 BuildArch: noarch
