@@ -1,0 +1,12 @@
+Below are the license mappings for all of the files found in this repository.
+All attempts have been made to ensure accuracy of the corresponding license files.
+If you've found an issue please file an issue or pull request.
+
+amd-ucodegen-tweak.diff - GPL-2.0
+install-real-ucode - CC0
+process-amd.sh - CC0
+real-ucode.spec - CC0
+microcode/amd-ucode/* - Copyright (C) 2010-2022 Advanced Micro Devices, Inc., All rights reserved.
+microcode/intel-ucode/* - Copyright (c) 2018-2021 Intel Corporation, All rights reserved.
+
+Please see the included LICENSE.* files for the corresponding full license texts.
