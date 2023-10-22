@@ -1,7 +1,7 @@
 Name: real-ucode
 Version: 20231022
-Release: 2
-Summary: Actually provides the latest CPU microcode for AMD
+Release: 3
+Summary: Actually provides the latest CPU microcode for AMD and Intel
 License: proprietary
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -20,13 +20,13 @@ https://github.com/AndyLavr/amd-ucodegen
 echo "Be sure to run install-real-ucode and again after each linux-firmware update!";
 
 %install
+install -Dm755 %{_sourcedir}/install-real-ucode %{buildroot}/usr/sbin/install-real-ucode;
 mkdir -p %{buildroot}/usr/lib/firmware/amd-ucode-real/;
 install -Dm644 %{_sourcedir}/microcode/amd-ucode/microcode_amd_fam*.bin %{buildroot}/usr/lib/firmware/amd-ucode-real/;
-#mkdir -p %{buildroot}/usr/lib/firmware/intel-ucode-real/;
-#install -Dm644 %{_sourcedir}/microcode/intel-ucode/* %{buildroot}/usr/lib/firmware/intel-ucode-real/;
-install -Dm755 %{_sourcedir}/install-real-ucode %{buildroot}/usr/sbin/install-real-ucode;
+mkdir -p %{buildroot}/usr/lib/firmware/intel-ucode-real/;
+iucode_tool --ignore-broken --overwrite --write-firmware=%{buildroot}/usr/lib/firmware/intel-ucode-real/ %{_sourcedir}/CPUMicrocodes/Intel/*.bin;
 
 %files
 /usr/lib/firmware/amd-ucode-real/microcode_amd_fam*.bin
-#/usr/lib/firmware/intel-ucode-real/*
+/usr/lib/firmware/intel-ucode-real/*
 /usr/sbin/install-real-ucode

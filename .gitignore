@@ -5,3 +5,5 @@ noarch
 *.rpm
 build
 .build*
+amd-ucodegen
+CPUMicrocodes
