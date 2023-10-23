@@ -26,6 +26,12 @@ Usage
 - Install the package
 - Run the actual installer (necessary to prevent package conflict with linux-firmware): sudo install-real-ucode
 
+Verifying it took
+-----------------
+- You can do this a few ways:
+  - Running `lscpu` before and after, then diffing
+  - Checking logs, eg. `journalctl -b0 | grep -i microcode` then `-b-1`
+
 Building
 --------
 - git clone [THIS REPO]
