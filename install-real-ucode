@@ -7,7 +7,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo "NOTE: you must first reboot if you haven't since last installing a kernel";
 	echo "Installing updated microcode, to restore: dnf reinstall linux-firmware";
 	cp -fv /usr/lib/firmware/amd-ucode-real/microcode_amd_fam*.bin /usr/lib/firmware/amd-ucode/;
-	cp -fv /usr/lib/firmware/intel-ucode-real/* /usr/lib/firmware/intel-ucode/;
+	cp -fv /usr/lib/firmware/intel-ucode-real/0* /usr/lib/firmware/intel-ucode/;
 	echo "Invoking dracut";
 	dracut -f;
 	echo "Please reboot to enjoy new microcode :)";
