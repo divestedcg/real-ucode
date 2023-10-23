@@ -59,3 +59,9 @@ Credits
 	- https://github.com/platomav/CPUMicrocodes
 - Andy Lavr for the AMD conversion program
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
+
+Other Notes
+-----------
+- There is an Arch Linux port on the AUR by @moparisthebest:
+  - https://aur.archlinux.org/packages/amd-real-ucode-git
+  - https://aur.archlinux.org/packages/intel-real-ucode-git
