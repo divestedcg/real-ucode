@@ -3,6 +3,8 @@
 
 if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
+umask 022;
+
 if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo "NOTE: you must first reboot if you haven't since last installing a kernel";
 	echo "Installing updated microcode, to restore: dnf reinstall linux-firmware";
