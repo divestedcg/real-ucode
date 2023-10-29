@@ -34,10 +34,10 @@ Verifying it took
 
 Status
 ------
-| Board | CPU | CPUID | Version | Status |
-| ----- | --- | ----- | ------- | ------ |
+| Board | CPU | CPUID | Version | Change | Notes |
+| ----- | --- | ----- | ------- | ------ | ----- |
 | ASUS M1605YA | 7530U | 00A50F00 | 302 | 0x0a50000d -> 0x0a50000f |
-| ASUS M5402RA | 6800H | ? | 301 | severe breakage, stuck at 400MHz, can't suspend |
+| ASUS M5402RA | 6800H | 00A40F41 | 301 | 0x0a404101 -> 0x0a404102 | severe breakage, stuck at 400MHz, can't suspend |
 | ASUS TUF Gaming X570 | 5900X | 00A20F10 | 5003 | already latest |
 | ASUS TUF Gaming X670E | 7950X | 00A60F12 | 1809 | already latest |
 | Gigabyte B450-DS3H | 3600 | 00870F10 | F65b | already latest |
