@@ -36,13 +36,14 @@ Status
 ------
 | Board | CPU | Version | Status |
 | ----- | --- | ------- | ------ |
-| ASUS M1605YA | 7530u | 302 | 0x0a50000d -> 0x0a50000f |
+| ASUS M1605YA | 7530U | 302 | 0x0a50000d -> 0x0a50000f |
 | ASUS M5402RA | 6800H | 301 | severe breakage, stuck at 400MHz, can't suspend |
-| ASUS TUF Gaming X670E | 7950x | 1809 | already latest |
+| ASUS TUF Gaming X670E | 7950X | 1809 | already latest |
 | Gigabyte B450-DS3H | 3600 | F65b | already latest |
-| Lenovo S340-15API | 3500u | amcn31ww | already latest |
-| MSI A5M-288 | 5700u | E155LAMS.115 | 0x08608103 -> 0x08608104 |
-| MSI X570 A-PRO | 5900x | 7C37vHL | 0x0a20120a -> 0x0a20120e |
+| Lenovo S340-15API | 3500U | amcn31ww | already latest |
+| MSI A5M-288 | 5700U | E155LAMS.115 | 0x08608103 -> 0x08608104 |
+| MSI X570 A-PRO | 5900X | 7C37vHL | 0x0a20120a -> 0x0a20120e |
+| ? | 5800H | ? | 0xa50000c -> 0xa50000f |
 
 Building
 --------
