@@ -32,6 +32,18 @@ Verifying it took
   - Running `lscpu` before and after, then diffing
   - Checking logs, eg. `journalctl -b0 | grep -i microcode` then `-b-1`
 
+Status
+------
+| Board | CPU | Version | Status |
+| ----- | --- | ------- | ------ |
+| ASUS M1605YA | 7530u | 302 | updated microcode |
+| ASUS M5402RA | 6800H | 1.0? | servere breakage, stuck at 400MHz, can't suspend |
+| ASUS TUF Gaming X670E | 7950x | 1809 | already latest |
+| Gigabyte B450-DS3H | 3600 | F65b | already latest |
+| Lenovo S340-15API | 3500u | amcn31ww | already latest |
+| MSI A5M-288 | 5700u | E155LAMS.115 | updated microcode |
+| MSI X570 A-PRO | 5900x | 7C37vHL | updated microcode |
+
 Building
 --------
 - git clone [THIS REPO]
