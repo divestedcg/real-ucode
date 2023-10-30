@@ -41,10 +41,10 @@ Status
 | ASUS TUF Gaming X570 | 5900X | 00A20F10 | 5003 | already latest |
 | ASUS TUF Gaming X670E | 7950X | 00A60F12 | 1809 | already latest |
 | Gigabyte B450-DS3H | 3600 | 00870F10 | F65b | already latest |
-| Lenovo S340-15API | 3500U | 00810F81 | amcn31ww | already latest |
+| Lenovo 15ACH6A | 5800H | 00A50F00 | G9CN33WW | 0xa50000c -> 0xa50000f |
+| Lenovo S340-15API | 3500U | 00810F81 | AMCN31WW | already latest |
 | MSI A5M-288 | 5700U | 00860F81 | E155LAMS.115 | 0x08608103 -> 0x08608104 |
 | MSI X570 A-PRO | 5900X | 00A20F12 | 7C37vHL | 0x0a20120a -> 0x0a20120e |
-| ? | 5800H | 00A50F00 | ? | 0xa50000c -> 0xa50000f |
 
 Building
 --------
