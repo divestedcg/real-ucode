@@ -24,7 +24,6 @@ Prebuilts
 Usage
 -----
 - Install the package
-- Run the actual installer (necessary to prevent package conflict with linux-firmware): sudo install-real-ucode
 
 Verifying it took
 -----------------
