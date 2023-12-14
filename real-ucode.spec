@@ -1,6 +1,6 @@
 Name: real-ucode
-Version: 20231104
-Release: 3
+Version: 20231213
+Release: 1
 Epoch: 3
 Summary: Actually provides the latest CPU microcode for AMD and Intel
 License: proprietary
