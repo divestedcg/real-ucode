@@ -73,6 +73,10 @@ Credits
 	- https://github.com/platomav/CPUMicrocodes
 - Andy Lavr for the AMD conversion program
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
+- @chinobino for their extensive microcode collection
+	- https://winraid.level1techs.com/t/offer-intel-cpu-microcode-archives/34261
+- Contributors to the Winraid/Level1Techs forum for additional microcode
+	- https://winraid.level1techs.com/t/intel-amd-via-freescale-cpu-microcode-repositories-discussion/32301
 
 Other Notes
 -----------
