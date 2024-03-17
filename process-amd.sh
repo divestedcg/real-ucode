@@ -17,3 +17,5 @@ umask 022;
 
 #move into place
 mv microcode_amd_fam*.bin ../microcode/amd-ucode/
+
+#TODO: 00880F40, 00A70FC0
