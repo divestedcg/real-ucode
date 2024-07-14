@@ -49,8 +49,8 @@ Status
 Building
 --------
 - git clone [THIS REPO]
-- CentOS: rpmbuild -ba brace.spec
-- Fedora: rpmbuild -ba brace.spec
+- CentOS: rpmbuild -ba real-ucode.spec
+- Fedora: rpmbuild -ba real-ucode.spec
 
 Updating the microcode
 ----------------------
