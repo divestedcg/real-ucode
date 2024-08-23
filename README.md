@@ -64,14 +64,14 @@ Updating the microcode
 - mv ../amd-ucodegen/amd-ucodegen .
 - source ../process-amd.sh
 - source ../process-intel.sh
-- update version/date in real-ucode.sh
+- update version/date in real-ucode.spec
 - commit it with the short git hash of the CPUMicrocodes repo
 
 Credits
 -------
 - Huge thanks to Plato Mavropoulos for the actual microcode collection
 	- https://github.com/platomav/CPUMicrocodes
-- Andy Lavr for the AMD conversion program
+- Guenter Roeck for the AMD conversion program
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
 - @chinobino for their extensive microcode collection
 	- https://winraid.level1techs.com/t/offer-intel-amd-via-cpu-microcode-archives-1995-present/102857
