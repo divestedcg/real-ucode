@@ -11,7 +11,7 @@ Overview
 Compatibility
 -------------
 - CentOS 9/Stream
-- Fedora 38/39
+- Fedora 38/39/40/etc.
 
 License
 -------
@@ -75,7 +75,7 @@ Credits
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
 - @chinobino for their extensive microcode collection
 	- https://winraid.level1techs.com/t/offer-intel-cpu-microcode-archives/34261
-- Contributors to the Winraid/Level1Techs forum for additional microcode
+- Contributors to the Winraid/Level1Techs forum, such as @westlake, for additional microcode
 	- https://winraid.level1techs.com/t/intel-amd-via-freescale-cpu-microcode-repositories-discussion/32301
 
 Other Notes
@@ -83,3 +83,6 @@ Other Notes
 - There is an Arch Linux port on the AUR by @moparisthebest:
   - https://aur.archlinux.org/packages/amd-real-ucode-git
   - https://aur.archlinux.org/packages/intel-real-ucode-git
+- Forum threads for this are here:
+  - https://winraid.level1techs.com/t/real-ucode-all-the-microcodes-but-packaged/103179
+  - https://discuss.privacyguides.net/t/real-ucode-a-fedora-package-with-all-the-microcode/14608
