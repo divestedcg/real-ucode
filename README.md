@@ -86,3 +86,5 @@ Other Notes
 - Forum threads for this are here:
   - https://winraid.level1techs.com/t/real-ucode-all-the-microcodes-but-packaged/103179
   - https://discuss.privacyguides.net/t/real-ucode-a-fedora-package-with-all-the-microcode/14608
+- Determine CPUID:
+  - `cpuid | grep "processor serial number =" | head -n1 | sed 's/.* = //;s/-0000.*//;s/-//'`
