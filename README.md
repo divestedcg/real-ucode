@@ -31,8 +31,8 @@ Verifying it took
   - Running `lscpu` before and after, then diffing
   - Checking logs, eg. `journalctl -b0 | grep -i microcode` then `-b-1`
 
-Status
-------
+Status (outdated)
+-----------------
 | Board | CPU | CPUID | Version | Change | Notes |
 | ----- | --- | ----- | ------- | ------ | ----- |
 | ASUS M1605YA | 7530U | 00A50F00 | 302 | 0x0a50000d -> 0x0a50000f |
@@ -74,7 +74,7 @@ Credits
 - Andy Lavr for the AMD conversion program
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
 - @chinobino for their extensive microcode collection
-	- https://winraid.level1techs.com/t/offer-intel-cpu-microcode-archives/34261
+	- https://winraid.level1techs.com/t/offer-intel-amd-via-cpu-microcode-archives-1995-present/102857
 - Contributors to the Winraid/Level1Techs forum, such as @westlake, for additional microcode
 	- https://winraid.level1techs.com/t/intel-amd-via-freescale-cpu-microcode-repositories-discussion/32301
 
