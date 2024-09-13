@@ -75,7 +75,7 @@ Credits
 	- GPL-2.0: https://github.com/AndyLavr/amd-ucodegen
 - @chinobino for their extensive microcode collection
 	- https://winraid.level1techs.com/t/offer-intel-amd-via-cpu-microcode-archives-1995-present/102857
-- Contributors to the Winraid/Level1Techs forum, such as @westlake and @lfb6, for additional microcode
+- Contributors to the Winraid/Level1Techs forum, such as @westlake, @lfb6, and @jen11, for additional microcode
 	- https://winraid.level1techs.com/t/intel-amd-via-freescale-cpu-microcode-repositories-discussion/32301
 
 Other Notes
