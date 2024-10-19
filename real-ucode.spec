@@ -1,5 +1,5 @@
 Name: real-ucode
-Version: 20241012
+Version: 20241019
 Release: 2
 Epoch: 3
 Summary: Actually provides the latest CPU microcode for AMD and Intel
