@@ -1,17 +1,41 @@
 real-ucode
 ==========
 
-Overview
---------
-- AMD appears to primarily only include microcode for enterprise platforms in the linux-firmware repo.
-  - https://divested.dev/misc/amd-ucode.txt
-- Intel also appears to miss a few and also doesn't always include the latest available.
-  - https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/issues/10
+Background
+----------
+- AMD and Intel both are actively harming users by providing incomplete and delayed microcode updates (to Linux)
+- Why microcode?
+  - Microcode updates provide functional and security fixes and are most importantly available out-of-band. This allows operating systems to provide rapid updates side stepping the need for vendor BIOS/EFI update releases and their installation.
+
+Market Segmentation
+-------------------
+This is most clear with AMD by the following two reasons. Their goal is to push cloud providers to enterprise platforms and discourage use of cheaper consumer platforms.
+
+- AMD only provides direct microcode updates for enterprise platforms. Consumer platforms only get microcode updates via AGESA updates.
+  - Direct microcode updates are hot-loadable offering minimal downtime.
+  - AGESA updates would require eg. the shuffling of virtual machines to another system and a reboot of the host.
+- AMD actively delays updates to consumer systems by 2-3 months
+  - This is before the delay from vendors providing system/motherboard updates
+
+| bulletin | publication date | earliest enteprise microcode | earliest consumer agesa |
+| -------- | ---------------- | ---------------------------- | ----------------------- |
+| AMD-SB-7005 | 2023-08-08 | 2023-06-09 | 2023-08-22 |
+| AMD-SB-7008 | 2023-07-24 | 2023-06-06 | 2023-11-21 |
+| AMD-SB-7014 | 2024-08-09 | 2024-05-03 | 2024-07-30 |
+
+Stats (2025-02-03)
+------------------
+| provider | # supported cpuids | # outdated |
+| -------- | ------------------ | ---------- |
+| Intel (official) | 290 | 120 |
+| Intel (real-ucode) | 615 | 2 |
+| AMD (linux-firmware) | 41 | 11 |
+| AMD (real-ucode) | 106 | 3 |
 
 Compatibility
 -------------
 - CentOS 9/Stream
-- Fedora 38/39/40/etc.
+- Fedora 38/39/40/41/etc.
 
 License
 -------
