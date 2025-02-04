@@ -48,12 +48,14 @@ Prebuilts
 Usage
 -----
 - Install the package
+- Regenerate initramfs: dracut -f
+- Reboot
 
 Verifying it took
 -----------------
 - You can do this a few ways:
-  - Running `lscpu` before and after, then diffing
   - Checking logs, eg. `journalctl -b0 | grep -i microcode` then `-b-1`
+  - Less reliable, running `lscpu` before and after, then diffing
 
 Status (outdated)
 -----------------
@@ -76,8 +78,8 @@ Building
 - CentOS: rpmbuild -ba real-ucode.spec
 - Fedora: rpmbuild -ba real-ucode.spec
 
-Updating the microcode
-----------------------
+Maintaining this repo
+---------------------
 - git clone [THIS REPO]
 - git clone https://github.com/platomav/CPUMicrocodes
 - git clone https://github.com/AndyLavr/amd-ucodegen
