@@ -54,8 +54,9 @@ Special AMD Incompatibility Notice (2025-03-02)
 
 Usage
 -----
-- Install the package
-- Regenerate initramfs: dracut -f
+- Once Divested-RPM is installed, simply running `dnf update` will pull in our `amd-ucode-firmware` and `microcode_ctl` packages due to their higher epoch version
+- Alternatively build them yourself and install them manually
+- Regenerate initramfs: `dracut -f`
 - Reboot
 
 Verifying it took
