@@ -17,7 +17,7 @@ This is most clear with AMD by the following two reasons. Their goal is to push 
 - AMD actively delays updates to consumer systems by 2-3 months
   - This is before the delay from vendors providing system/motherboard updates
 
-| bulletin | publication date | earliest enteprise microcode | earliest consumer agesa |
+| bulletin | publication date | earliest enterprise microcode | earliest consumer agesa |
 | -------- | ---------------- | ---------------------------- | ----------------------- |
 | [AMD-SB-7005](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7005.html) | 2023-08-08 | 2023-06-09 | 2023-08-22 |
 | [AMD-SB-7008](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7008.html) | 2023-07-24 | 2023-06-06 | 2023-11-21 |
@@ -44,6 +44,13 @@ License
 Prebuilts
 ---------
 - Fedora via Divested-RPM: https://divested.dev/index.php?page=software#divested-release
+
+Special AMD Incompatibility Notice (2025-03-02)
+-----------------------------------------------
+- After the recent AMD microcode signature verification vulnerability (CVE-2024-56161), microcode after 2024-12 will fail to load on pre 2024-12 bioses
+- You can install an older version from our repository by: `sudo dnf install amd-ucode-firmware-20250224-1`
+- Then disable updates for it: edit /etc/dnf/dnf.conf and append `excludepkgs=amd-ucode-firmware`
+- Closely watch your vendor for new bios updates
 
 Usage
 -----
