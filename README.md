@@ -23,13 +23,13 @@ This is most clear with AMD by the following two reasons. Their goal is to push 
 | [AMD-SB-7008](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7008.html) | 2023-07-24 | 2023-06-06 | 2023-11-21 |
 | [AMD-SB-7014](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html) | 2024-08-09 | 2024-05-03 | 2024-07-30 |
 
-Stats (2025-02-16)
+Stats (2025-03-02)
 ------------------
 | provider | # supported cpuids | # outdated |
 | -------- | ------------------ | ---------- |
-| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 275 | 32 |
+| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 275 | 40 |
 | Intel (real-ucode) | 616 | 2 |
-| [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 11 |
+| [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 18 |
 | AMD (real-ucode) | 107 | 3 |
 
 Compatibility
