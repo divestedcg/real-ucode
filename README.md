@@ -23,13 +23,13 @@ This is most clear with AMD by the following two reasons. Their goal is to push 
 | [AMD-SB-7008](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7008.html) | 2023-07-24 | 2023-06-06 | 2023-11-21 |
 | [AMD-SB-7014](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html) | 2024-08-09 | 2024-05-03 | 2024-07-30 |
 
-Stats (2025-03-02)
+Stats (2025-03-09)
 ------------------
 | provider | # supported cpuids | # outdated |
 | -------- | ------------------ | ---------- |
-| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 275 | 40 |
+| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 275 | 41 |
 | Intel (real-ucode) | 616 | 2 |
-| [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 18 |
+| [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 23 |
 | AMD (real-ucode) | 107 | 3 |
 
 Compatibility
@@ -117,6 +117,7 @@ Other Notes
 - There is an Arch Linux port on the AUR by @moparisthebest:
   - https://aur.archlinux.org/packages/amd-real-ucode-git
   - https://aur.archlinux.org/packages/intel-real-ucode-git
+- There is a similar project for NixOS here: https://github.com/e-tho/ucodenix
 - Forum threads for this are here:
   - https://winraid.level1techs.com/t/real-ucode-all-the-microcodes-but-packaged/103179
   - https://discuss.privacyguides.net/t/real-ucode-a-fedora-package-with-all-the-microcode/14608
