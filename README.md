@@ -50,6 +50,8 @@ Special AMD Incompatibility Notice (2025-03-02)
 - After the recent AMD microcode signature verification vulnerability (CVE-2024-56161), microcode dated after 2024-11 will fail to load on pre 2025-01 bioses
 - You can install an older version from our repository by: `sudo dnf install amd-ucode-firmware-20250224-1`
 - Then disable updates for it: edit /etc/dnf/dnf.conf and append `excludepkgs=amd-ucode-firmware`
+- You will also need an extra kernel command line argument since the Linux kernel has a hardcoded list of ucode hashes only covering those in linux-firmware: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
+   - This sadly taints the kernel
 - Closely watch your vendor for new bios updates
 
 Usage
