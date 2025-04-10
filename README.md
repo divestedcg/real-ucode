@@ -39,9 +39,9 @@ Stats (2025-03-24)
 | AMD (real-ucode) | 107 | 3 |
 
 - Another way to look at it:
-  - Intel has provided roughly 42 updates over the past 6 years.
+  - Intel has provided roughly 39 updates over the past 6 years.
   - AMD has provided roughly 24 updates over the past 12 years.
-  - real-ucode has provided roughly 77 updates over the past 1.5 years
+  - real-ucode has provided roughly 69 updates over the past 1.5 years.
 
 Compatibility
 -------------
