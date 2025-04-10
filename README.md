@@ -23,6 +23,13 @@ This is most clear with AMD by the following two reasons. Their goal is to push 
 | [AMD-SB-7008](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7008.html) | 2023-07-24 | 2023-06-06 | 2023-11-21 |
 | [AMD-SB-7014](https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7014.html) | 2024-08-09 | 2024-05-03 | 2024-07-30 |
 
+Vendor Negligence
+-----------------
+> However, silly people carve out random microcode blobs from BIOS packages and think are doing other people a service this way...
+
+I as of 2025-04-10 have 8 unique Zen1-4 AMD machines: Only 2 of them have been patched against CVE-2024-56161 despite being some 90 days old now, 3 of them have received an update in 2025, 3 in 2024, 1 in 2023, and 1 in 2021. Those last 5 are actively vulnerable to multiple known exploits purely because they haven't received vendor updates, but can be (partially) mitigated by simply loading the latest microcode as available from this repo. This is the direct blame of the vendors, but also the direct blame of Intel and AMD for only making the situation worse with their selective releases.
+
+
 Stats (2025-03-24)
 ------------------
 | provider | # supported cpuids | # outdated |
