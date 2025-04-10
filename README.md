@@ -29,7 +29,6 @@ Vendor Negligence
 
 I as of 2025-04-10 have 8 unique Zen1-4 AMD machines: Only 2 of them have been patched against CVE-2024-56161 despite being some 90 days old now, 3 of them have received an update in 2025, 3 in 2024, 1 in 2023, and 1 in 2021. Those last 5 are actively vulnerable to multiple known exploits purely because they haven't received vendor updates, but can be (partially) mitigated by simply loading the latest microcode as available from this repo. This is the direct blame of the vendors, but also the direct blame of Intel and AMD for only making the situation worse with their selective releases.
 
-
 Stats (2025-03-24)
 ------------------
 | provider | # supported cpuids | # outdated |
@@ -39,10 +38,15 @@ Stats (2025-03-24)
 | [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 28 |
 | AMD (real-ucode) | 107 | 3 |
 
+- Another way to look at it:
+  - Intel has provided roughly 42 updates over the past 6 years.
+  - AMD has provided roughly 24 updates over the past 12 years.
+  - real-ucode has provided roughly 77 updates over the past 1.5 years
+
 Compatibility
 -------------
 - CentOS 9/Stream
-- Fedora 38/39/40/41/etc.
+- Fedora 38/39/40/41/42/etc.
 
 License
 -------
@@ -74,21 +78,6 @@ Verifying it took
 - You can do this a few ways:
   - Checking logs, eg. `journalctl -b0 | grep -i microcode` then `-b-1`
   - Less reliable, running `lscpu` before and after, then diffing
-
-Status (outdated)
------------------
-| Board | CPU | CPUID | Version | Change | Notes |
-| ----- | --- | ----- | ------- | ------ | ----- |
-| ASUS M1605YA | 7530U | 00A50F00 | 302 | 0x0a50000d -> 0x0a50000f |
-| ASUS M5402RA | 6800H | 00A40F41 | 301 | 0x0a404101 -> 0x0a404102 | severe breakage, stuck at 400MHz after suspend |
-| ASUS TUF Gaming X570 | 5900X | 00A20F10 | 5003 | already latest |
-| ASUS TUF Gaming X670E | 7950X | 00A60F12 | 1809 | already latest |
-| Gigabyte B450-DS3H | 3600 | 00870F10 | F65b | already latest |
-| Lenovo 15ACH6A | 5800H | 00A50F00 | G9CN33WW | 0x0a50000c -> 0x0a50000f |
-| Lenovo S340-15API | 3500U | 00810F81 | AMCN31WW | already latest |
-| MSI A5EFK | 5800H | 00A50F00 | E15CKAMS.10C | 0x0a50000? -> 0x0a50000f |
-| MSI A5M-288 | 5700U | 00860F81 | E155LAMS.115 | 0x08608103 -> 0x08608104 |
-| MSI X570 A-PRO | 5900X | 00A20F12 | 7C37vHL | 0x0a20120a -> 0x0a20120e |
 
 Building
 --------
