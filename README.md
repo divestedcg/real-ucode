@@ -38,10 +38,11 @@ Stats (2025-03-24)
 | [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 41 | 28 |
 | AMD (real-ucode) | 107 | 3 |
 
-- Another way to look at it:
-  - Intel has provided roughly 39 updates over the past 6 years.
-  - AMD has provided roughly 24 updates over the past 12 years.
-  - real-ucode has provided roughly 69 updates over the past 1.5 years.
+Stats (alternate) (2025-04-10)
+------------------------------
+- Intel has provided roughly 39 updates over the past 6 years.
+- AMD has provided roughly 24 updates over the past 12 years.
+- real-ucode has provided roughly 69 updates over the past 1.5 years.
 
 Compatibility
 -------------
