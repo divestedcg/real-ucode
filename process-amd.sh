@@ -106,6 +106,8 @@ umask 022;
 	AMD/cpu00B00F10* \
 	AMD/cpu00B00F20* \
 	AMD/cpu00B00F21* \
+	AMD/cpu00B00F80* \
+	AMD/cpu00B00F81* \
 	AMD/cpu00B10F00* \
 	AMD/cpu00B10F10* \
 	AMD/cpu00B20F40* \
