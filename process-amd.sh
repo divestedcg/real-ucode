@@ -85,6 +85,7 @@ umask 022;
 	AMD/cpu00A60F00* \
 	AMD/cpu00A60F11* \
 	AMD/cpu00A60F12* \
+	AMD/cpu00A60F13* \
 	AMD/cpu00A70F00* \
 	AMD/cpu00A70F40* \
 	AMD/cpu00A70F41* \
