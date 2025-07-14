@@ -4,7 +4,7 @@
 umask 022;
 
 #fam15h
-./amd-ucodegen \
+../compiled/amd-ucodegen \
 	AMD/cpu00600F00* \
 	AMD/cpu00600F01* \
 	AMD/cpu00600F10* \
@@ -24,14 +24,14 @@ umask 022;
 	AMD/cpu00690F00*
 
 #fam16h
-./amd-ucodegen \
+../compiled/amd-ucodegen \
 	AMD/cpu00700F00* \
 	AMD/cpu00700F01* \
 	AMD/cpu00730F00* \
 	AMD/cpu00730F01*
 
 #fam17h
-./amd-ucodegen \
+../compiled/amd-ucodegen \
 	AMD/cpu00800F00* \
 	AMD/cpu00800F10* \
 	AMD/cpu00800F11* \
@@ -60,7 +60,7 @@ umask 022;
 	AMD/cpu008A0F00*
 
 #fam19h
-./amd-ucodegen \
+../compiled/amd-ucodegen \
 	AMD/cpu00A00F00* \
 	AMD/cpu00A00F10* \
 	AMD/cpu00A00F11* \
@@ -102,7 +102,7 @@ umask 022;
 	AMD/cpu00AA0F02*
 
 #fam1ah
-./amd-ucodegen \
+../compiled/amd-ucodegen \
 	AMD/cpu00B00F00* \
 	AMD/cpu00B00F10* \
 	AMD/cpu00B00F20* \
@@ -117,6 +117,3 @@ umask 022;
 	AMD/cpu00B40F41* \
 	AMD/cpu00B60F00* \
 	AMD/cpu00B70F00*
-
-#move into place
-mv microcode_amd_fam*.bin ../microcode/amd-ucode/

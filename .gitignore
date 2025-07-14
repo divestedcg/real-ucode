@@ -7,3 +7,6 @@ build
 .build*
 amd-ucodegen
 CPUMicrocodes
+CPUMicrocodes-resigned
+compiled
+security-research

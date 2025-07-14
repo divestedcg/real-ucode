@@ -1,6 +1,6 @@
 Name: real-ucode
-Version: 20250709
-Release: 1
+Version: 20250714
+Release: 3
 Epoch: 3
 Summary: Actually provides the latest CPU microcode for AMD and Intel
 License: proprietary
@@ -19,8 +19,21 @@ Please see the included README
 Summary: Latest microcode for AMD
 License: Redistributable, no modification permitted
 Requires: linux-firmware-whence
+RemovePathPostfixes: .official
 %description -n amd-ucode-firmware
 Microcode updates for AMD CPUs.
+
+%package -n amd-ucode-firmware-resigned
+Summary: Latest microcode for AMD, resigned
+License: Redistributable, no modification permitted
+Requires: linux-firmware-whence
+RemovePathPostfixes: .resigned
+Provides: amd-ucode-firmware
+%description -n amd-ucode-firmware-resigned
+Microcode updates for AMD CPUs, resigned for vulnerable loaders.
+
+%post -n amd-ucode-firmware-resigned
+echo "You must disable ucode hash check: sudo grubby --update-kernel=ALL --args=\"microcode.amd_sha_check=off\"";
 
 %package -n microcode_ctl
 Summary: Latest microcode for Intel
@@ -40,7 +53,12 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/real-ucode/REA
 /usr/share/doc/real-ucode/README.md
 
 %files -n amd-ucode-firmware
-/usr/lib/firmware/amd-ucode/*
+/usr/lib/firmware/amd-ucode/LICENSE.amd-ucode
+/usr/lib/firmware/amd-ucode/*.bin.official
+
+%files -n amd-ucode-firmware-resigned
+/usr/lib/firmware/amd-ucode/LICENSE.amd-ucode
+/usr/lib/firmware/amd-ucode/*.bin.resigned
 
 %files -n microcode_ctl
 /usr/lib/firmware/intel-ucode/*

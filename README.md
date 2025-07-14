@@ -60,10 +60,8 @@ Prebuilts
 Special AMD Incompatibility Notice (2025-03-02)
 -----------------------------------------------
 - After the recent AMD microcode signature verification vulnerability (CVE-2024-56161), microcode dated after 2024-11 will fail to load on pre 2025-01 bioses
-- You can install an older version from our repository by: `sudo dnf install amd-ucode-firmware-20250224-1`
-- Then disable updates for it: edit /etc/dnf/dnf.conf and append `excludepkgs=amd-ucode-firmware`
-- You may also need an extra kernel command line argument since the Linux kernel has a hardcoded list of select ucode hashes: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
-   - Test first without it
+- We can utilize the vulnerability to resign new ucodes for the old loaders: `sudo dnf swap amd-ucode-firmware amd-ucode-firmware-resigned`
+- Disable the hash check: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
    - This evidently taints the kernel
 - Closely watch your vendor for new bios updates
 
@@ -86,18 +84,32 @@ Building
 - CentOS: rpmbuild -ba real-ucode.spec
 - Fedora: rpmbuild -ba real-ucode.spec
 
-Maintaining this repo
----------------------
+Preparing
+---------
 - git clone [THIS REPO]
 - git clone https://github.com/platomav/CPUMicrocodes
 - git clone https://github.com/AndyLavr/amd-ucodegen
+- git clone https://github.com/google/security-research
+- mkdir compiled
+- cd security-research/pocs/cpus/entrysign/zentool
+- sudo dnf install pkg-config gmp-devel json-c-devel openssl-devel libasan nasm dwarves
+- make
+- cp zentool ../../../../../compiled/
+- cd ../../../../../
 - cd amd-ucodegen
 - git apply ../amd-ucodegen-tweak.diff
 - make
-- cd ../CPUMicrocodes
-- mv ../amd-ucodegen/amd-ucodegen .
-- source ../process-amd.sh
+- cp amd-ucodegen ../compiled/
+- cd ..
+
+Maintaining this repo
+---------------------
+- cd CPUMicrocodes
+- git pull
 - source ../process-intel.sh
+- source ../process-amd-official.sh
+- source ../process-amd-resigned.sh
+- git add -A && git reset --hard
 - update version/date in real-ucode.spec
 - commit it with the short git hash of the CPUMicrocodes repo
 
