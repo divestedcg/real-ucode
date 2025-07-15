@@ -106,9 +106,9 @@ Maintaining this repo
 ---------------------
 - cd CPUMicrocodes
 - git pull
-- source ../process-intel.sh
-- source ../process-amd-official.sh
-- source ../process-amd-resigned.sh
+- sh ../process-intel.sh
+- sh ../process-amd-official.sh
+- sh ../process-amd-resigned.sh
 - git add -A && git reset --hard
 - update version/date in real-ucode.spec
 - commit it with the short git hash of the CPUMicrocodes repo
