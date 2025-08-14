@@ -61,7 +61,7 @@ Special AMD Incompatibility Notice (2025-03-02)
 -----------------------------------------------
 - After the recent AMD microcode signature verification vulnerability (CVE-2024-56161), microcode dated after 2024-11 will fail to load on pre 2025-01 bioses
 - We can utilize the vulnerability to resign new ucodes for the old loaders: `sudo dnf swap amd-ucode-firmware amd-ucode-firmware-resigned`
-- Disable the hash check: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
+- Hash check MUST be disabled: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
    - This evidently taints the kernel
 - Closely watch your vendor for new bios updates
 
@@ -71,6 +71,8 @@ Usage
 - Alternatively build them yourself and install them manually
 - Regenerate initramfs: `dracut -f`
 - Reboot
+- Verify
+   - If it fails then disable the hash check: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
 
 Verifying it took
 -----------------

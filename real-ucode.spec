@@ -23,6 +23,9 @@ RemovePathPostfixes: .official
 %description -n amd-ucode-firmware
 Microcode updates for AMD CPUs.
 
+%post -n amd-ucode-firmware
+echo "ucode hash check LIKELY needs to be disabled: sudo grubby --update-kernel=ALL --args=\"microcode.amd_sha_check=off\"";
+
 %package -n amd-ucode-firmware-resigned
 Summary: Latest microcode for AMD, resigned
 License: Redistributable, no modification permitted
@@ -33,7 +36,7 @@ Provides: amd-ucode-firmware
 Microcode updates for AMD CPUs, resigned for vulnerable loaders.
 
 %post -n amd-ucode-firmware-resigned
-echo "You must disable ucode hash check: sudo grubby --update-kernel=ALL --args=\"microcode.amd_sha_check=off\"";
+echo "ucode hash check MUST be disabled: sudo grubby --update-kernel=ALL --args=\"microcode.amd_sha_check=off\"";
 
 %package -n microcode_ctl
 Summary: Latest microcode for Intel
