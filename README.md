@@ -64,6 +64,7 @@ Special AMD Incompatibility Notice (2025-03-02)
 - Hash check MUST be disabled: `sudo grubby --update-kernel=ALL --args="microcode.amd_sha_check=off"`
    - This evidently taints the kernel
 - Closely watch your vendor for new bios updates
+- These may fail to load upon resume from suspend when using s3 sleep, please use s2idle instead
 
 Usage
 -----
