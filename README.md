@@ -129,6 +129,8 @@ Credits
 
 Other Notes
 -----------
+- There is an ALT Linux port by @vt-alt:
+  - https://github.com/altlinux/specs/blob/sisyphus/r/real-ucode/real-ucode.spec
 - There is an Arch Linux port on the AUR by @moparisthebest:
   - https://aur.archlinux.org/packages/amd-real-ucode-git
   - https://aur.archlinux.org/packages/intel-real-ucode-git
