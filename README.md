@@ -11,7 +11,7 @@ Market Segmentation
 -------------------
 This is most clear with AMD by the following two reasons. Their goal is to push cloud providers to enterprise platforms and discourage use of cheaper consumer platforms.
 
-- AMD only provides direct microcode updates for enterprise platforms. Consumer platforms only get microcode updates via AGESA updates.
+- AMD largely only provides direct microcode updates for enterprise platforms. Many consumer platforms only get microcode updates via AGESA updates.
   - Direct microcode updates are hot-loadable offering minimal downtime.
   - AGESA updates would require eg. the shuffling of virtual machines to another system and a reboot of the host.
 - AMD actively delays updates to consumer systems by 2-3 months
