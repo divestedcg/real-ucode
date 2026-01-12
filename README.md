@@ -66,6 +66,13 @@ Special AMD Incompatibility Notice (2025-03-02)
 - Closely watch your vendor for new bios updates
 - These may fail to load upon resume from suspend when using s3 sleep, please use s2idle instead
 
+Special Notice (2026-01-12)
+---------------------------
+- AMD ucode loading for both -official and -resigned is now broken on entrysign affected machines after 6.18.4 or newer
+   - please switch back to linux-firmware
+   - ref, mainline: d23550efc6800841b4d1639784afaebdea946ae0
+   - ref, stable: d75aa97c90da26ee4f29c768762061cf45c3106e
+
 Usage
 -----
 - Once Divested-RPM is installed, simply running `dnf update` will pull in our `amd-ucode-firmware` and `microcode_ctl` packages due to their higher epoch version
