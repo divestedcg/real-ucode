@@ -29,12 +29,12 @@ Vendor Negligence
 
 I as of 2025-04-10 have 8 unique Zen1-4 AMD machines: Only 2 of them have been patched against CVE-2024-56161 despite being some 90 days old now, 3 of them have received an update in 2025, 3 in 2024, 1 in 2023, and 1 in 2021. Those last 5 are actively vulnerable to multiple known exploits purely because they haven't received vendor updates, but can be (partially) mitigated by simply loading the latest microcode as available from this repo. This is the direct blame of the vendors, but also the direct blame of Intel and AMD for only making the situation worse with their selective releases.
 
-Stats (2025-11-15)
+Stats (2026-02-14 ❤️‍🔥 )
 ------------------
 | provider | # supported cpuids | # outdated |
 | -------- | ------------------ | ---------- |
-| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 286 | 42 |
-| Intel (real-ucode) | 618 | 2 |
+| [Intel (official)](https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/) | 286 | 47 |
+| Intel (real-ucode) | 633 | 2 |
 | [AMD (linux-firmware)](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/amd-ucode) | 55 | 28 |
 | AMD (real-ucode) | 113 | 3 |
 
